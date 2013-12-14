@@ -11,7 +11,7 @@ Un usuario puede
             cargas que ha hecho
 
 
-users
+user
     name        String
     lastname    String
     email       String
@@ -20,18 +20,18 @@ users
     created     Date
     updated     Date
 
-cars
+car
     model       Number
     year        Number
     created     Date
     updated     Date
 
-makes
+make
     name        String
     created     Date
     updated     Date
 
-models
+model
     name        String
     make        Number
     created     Date

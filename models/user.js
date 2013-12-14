@@ -1,36 +1,57 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto'),
+    validations = require('./validations'),
     _ = require('underscore'),
     UserSchema;
 
 UserSchema = new Schema({
-    name: { type: String },
-    email: { type: String },
+    name: {
+        type: String,
+        validate: [
+            validations.empty,
+            '{PATH} must have a value'
+        ]
+    },
+    email: {
+        type: String,
+        validate: [validations.email, '"{VALUE}" must be a valid {PATH}'],
+        lowercase: true
+    },
     password: { type: String },
     salt: { type: String },
     created_at: { type: Date },
     updated_at: { type: Date }
 });
 
-UserSchema.path('name').validate(function (name) {
-    return name;
-}, 'name must be a value');
+UserSchema.virtual('_password').set(function (config) {
+    this.salt = this.salt || UserSchema.statics.makeSalt();
+    this.password = UserSchema.statics.encryptPassword(
+        config.password,
+        this.salt,
+        config.callback
+    );
+}).get(function () {
+    return this.password;
+});
 
-UserSchema.virtual('_password')
-    .set(function (array_password) {
-        this.salt = this.salt || UserSchema.static.makeSalt();
-        this.password = UserSchema.static.encryptPassword(array_password[0], this.salt, array_password[1]);
-    }).get(function () {
-        return this.password;
-    });
+if (!UserSchema.options.toObject) {
+    UserSchema.options.toObject = {};
+}
 
-_.extend(UserSchema.static, {
+UserSchema.options.toObject.transform = function (document, result, options) {
+  // remove the _id of every document before returning the result
+  delete result._id;
+  delete result.password;
+  delete result.salt;
+}
+
+_.extend(UserSchema.statics, {
     encryptPassword: function (password, salt, callback) {
         crypto.pbkdf2(password, salt, 3, 256, callback);
     },
     makeSalt: function () {
-        return crypto.randomBytes(256).toString('base64');
+        return UserSchema.statics.makeRandom(256);
     },
     preSave: function (next) {
         var self = this;
@@ -38,10 +59,16 @@ _.extend(UserSchema.static, {
         if (this.isNew) {
             this.created_at = new Date;
         }
-        console.log('Model saving: ', this);
         next.apply(this);
+    },
+    makeToken: function () {
+        return UserSchema.statics.makeRandom(128);
+    },
+    makeRandom: function (bytes) {
+        return crypto.randomBytes(bytes).toString('base64');
     }
+
 });
 
-UserSchema.pre('save', UserSchema.static.preSave);
+UserSchema.pre('save', UserSchema.statics.preSave);
 mongoose.model('User', UserSchema);
