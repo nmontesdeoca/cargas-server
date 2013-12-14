@@ -45,7 +45,7 @@ fs.readdirSync(ejs_filters_path).forEach(function (file) {
 });
 
 // bootstrap db connection
-mongoose.connect(app.get('db'));
+mongoose.connect(process.env.db || app.get('db'));
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function callback () {
     console.log('connection database successfully');
