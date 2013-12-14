@@ -24,6 +24,10 @@ exports.login = function (request, response) {
             }
 
             User.encryptPassword(data.password, user.get('salt'), function (error, password) {
+                console.log('password');
+                console.log(password);
+                console.log('user.get('password')');
+                console.log(user.get('password'));
                 if (error) {
                     return response.json({
                         error: error
