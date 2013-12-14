@@ -4,7 +4,6 @@ var express = require('express'),
     fs = require('fs'),
     mongoose = require('mongoose'),
     app = express(),
-    config = require('./config'),
     models_path = __dirname + '/models',
     ejs_filters_path = __dirname + '/views/filters',
     routes;
@@ -23,7 +22,7 @@ app.configure(function () {
     app.use(app.router);
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
     app.use(express.static(path.join(__dirname, 'public')));
-    app.set('db', config.db[app.get('env')])
+    app.set('db', process.env.db || require('./config').db[app.get('env')])
 });
 
 app.configure('development', function () {
@@ -45,7 +44,7 @@ fs.readdirSync(ejs_filters_path).forEach(function (file) {
 });
 
 // bootstrap db connection
-mongoose.connect(process.env.db || app.get('db'));
+mongoose.connect(app.get('db'));
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function callback () {
     console.log('connection database successfully');
