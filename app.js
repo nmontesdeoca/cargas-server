@@ -67,6 +67,7 @@ var authorization = function (request, response, next) {
 app.get('/', routes.index.index);
 
 app.all('/login', routes.user.login);
+app.post('/register', routes.user.register);
 app.get('/refuels', authorization, routes.refuel.list);
 app.all('/refuels/create', authorization, routes.refuel.create);
 

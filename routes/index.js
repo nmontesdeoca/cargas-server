@@ -6,7 +6,7 @@ exports.index = function (request, response) {
     
     if (request.session.user_id) {
         data.user = request.session.user_id;
-        // response.redirect('/refuels');
+        response.redirect('/refuels');
         // response.render('index', data);
     } else {
         response.redirect('/login');

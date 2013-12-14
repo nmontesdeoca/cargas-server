@@ -44,6 +44,31 @@ exports.login = function (request, response) {
     }
 };
 
+exports.register = function (request, response) {
+    var user = new User();
+    user.set({
+        name: request.body.name,
+        email: request.body.email,                     
+        _password: {
+            password: request.body.password,
+            callback: function (error, password) {
+                user.set('password', password);
+                user.save(function (error) {
+                    if (error) {
+                        console.error(error);
+                        response.json({
+                            success: false,
+                            error: error
+                        });
+                        return;
+                    }
+                    response.redirect('/login');
+                });
+            }
+        }
+    });
+};
+
 exports.logout = function (request, response) {
     delete request.session.user_id;
     response.redirect('/');
