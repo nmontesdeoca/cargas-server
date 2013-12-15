@@ -24,8 +24,9 @@ exports.login = function (request, response) {
             }
 
             User.encryptPassword(data.password, user.get('salt'), function (error, password) {
+                password = password.toString();
                 console.log('password');
-                console.log(password);
+                console.log(password.toString());
                 console.log('user.get(password)');
                 console.log(user.get('password'));
                 if (error) {
