@@ -1,34 +1,17 @@
 <% include ../head %>
 
-    <div class="container">
+    <a href="/refuels/create" class="button pull-right">Agregar Recarga</a>
 
-        <h1><%= title %></h1>
-        
-        <a href="/refuels/create" class="btn btn-default pull-right">
-            <span class="glyphicon glyphicon-plus"></span> Agregar Recarga
-        </a>
-        
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>costo</th>
-                    <th>kilometraje</th>
-                    <th>capacidad</th>
-                    <th>fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (var i = 0, length = refuels.length; i < length; i++) { %>
-                <tr>
-                    <td>$<%= refuels[i].get('cost') %></td>
-                    <td><%= refuels[i].get('kilometers') %></td>
-                    <td><%= refuels[i].get('capacity') %></td>
-                    <td><%=: refuels[i].get('created_at') | date %></td>
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
+    <ul class="table-view">
+        <% for (var i = 0, length = refuels.length; i < length; i++) { %>
+        <li class="table-view-cell">
+            <strong>$<%= refuels[i].get('cost') %></strong>
+            <p><%= refuels[i].get('kilometers') %> kms</p>
+            <p><%= refuels[i].get('capacity') %> lts</p>
+            <p><%=: refuels[i].get('created_at') | date %></p>
 
-    </div>
+        </li>
+        <% } %>
+    </ul>
 
 <% include ../foot %>    
