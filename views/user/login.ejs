@@ -1,19 +1,7 @@
 <% include ../head %>
 
-    <form action="/login" method="post">
-        <div class="input-group">
-            <div class="input-row">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="superapp@cargas.com">
-            </div>
-            <div class="input-row">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="supersecretpassword">
-            </div>
-        </div>
-        <div class="bar-standard">
-            <button class="button-block">Entrar</button>
-        </div>
-    </form>
+    <a href="/auth/google" data-ignore="push">
+        <img width="200" src="/images/sign-in-with-google.png">
+    </a>
 
 <% include ../foot %>

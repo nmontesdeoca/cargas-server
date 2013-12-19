@@ -1,38 +1,21 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    crypto = require('crypto'),
-    validations = require('./validations'),
     _ = require('underscore'),
     UserSchema;
 
 UserSchema = new Schema({
-    name: {
-        type: String,
-        validate: [
-            validations.empty,
-            '{PATH} must have a value'
-        ]
+    first_name: {
+        type: String
+    },
+    last_name: {
+        type: String
     },
     email: {
         type: String,
-        validate: [validations.email, '"{VALUE}" must be a valid {PATH}'],
         lowercase: true
     },
-    password: { type: String },
-    salt: { type: String },
     created_at: { type: Date },
     updated_at: { type: Date }
-});
-
-UserSchema.virtual('_password').set(function (config) {
-    this.salt = this.salt || UserSchema.statics.makeSalt();
-    this.password = UserSchema.statics.encryptPassword(
-        config.password,
-        this.salt,
-        config.callback
-    );
-}).get(function () {
-    return this.password;
 });
 
 if (!UserSchema.options.toObject) {
@@ -42,8 +25,6 @@ if (!UserSchema.options.toObject) {
 UserSchema.options.toObject.transform = function (document, result, options) {
   // remove the _id of every document before returning the result
   delete result._id;
-  delete result.password;
-  delete result.salt;
 }
 
 _.extend(UserSchema.statics, {
@@ -66,8 +47,19 @@ _.extend(UserSchema.statics, {
     },
     makeRandom: function (bytes) {
         return crypto.randomBytes(bytes).toString('base64');
+    },
+    serialize: function(user, done) {
+        if (user.emails && user.emails.length) {
+            done(null, user.emails[0].value);
+        } else {
+            done(null, user.email);
+        }
+    },
+    deserialize: function(email, done) {
+        this.findOne({ email: email }, function (error, user) {
+            done(null, user);
+        });
     }
-
 });
 
 UserSchema.pre('save', UserSchema.statics.preSave);

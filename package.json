@@ -6,13 +6,17 @@
         "start": "node app"
     },
     "engines": {
-        "node": "0.8.1"
+        "node": "0.11.9"
     },
     "dependencies": {
         "express": "3.1.0",
         "ejs": "*",
         "less-middleware": "*",
         "mongoose": "*",
-        "underscore": "*"
+        "underscore": "*",
+        "passport": "*",
+        "passport-twitter": "*",
+        "passport-google": "*",
+        "passport-facebook": "*"
     }
 }

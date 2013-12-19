@@ -1,12 +1,33 @@
 var express = require('express'),
+    fs = require('fs'),
+    app = express(),
     http = require('http'),
     path = require('path'),
-    fs = require('fs'),
+    routes,
     mongoose = require('mongoose'),
-    app = express(),
+    passport = require('passport'),
     models_path = __dirname + '/models',
     ejs_filters_path = __dirname + '/views/filters',
-    routes;
+    
+    GoogleStrategy = require('passport-google').Strategy,
+    User,
+    
+    ensureAuthorization = function (request, response, next) {
+        if (request.isAuthenticated()) {
+            return next();
+        }
+        return response.redirect('/login');
+    },
+
+    requireJSFile = function (path, file) {
+        if (~file.indexOf('.js')) {
+            require(path + '/' + file);
+        }
+    },
+
+    requirePath = function (path) {
+        fs.readdirSync(path).forEach(requireJSFile.bind(requireJSFile, path));
+    };
 
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
@@ -19,6 +40,8 @@ app.configure(function () {
     app.use(express.methodOverride());
     app.use(express.cookieParser('car_gas_secret_key'));
     app.use(express.session());
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(app.router);
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
     app.use(express.static(path.join(__dirname, 'public')));
@@ -30,25 +53,15 @@ app.configure('development', function () {
 });
 
 // bootstrap models
-fs.readdirSync(models_path).forEach(function (file) {
-    if (~file.indexOf('.js')) {
-        require(models_path + '/' + file)
-    }
-});
+requirePath(models_path);
 
 // bootstrap ejs filters
-fs.readdirSync(ejs_filters_path).forEach(function (file) {
-    if (~file.indexOf('.js')) {
-        require(ejs_filters_path + '/' + file)
-    }
-});
+requirePath(ejs_filters_path);
 
 // bootstrap db connection
 mongoose.connect(app.get('db'));
-mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-mongoose.connection.once('open', function callback () {
-    console.log('connection database successfully');
-});
+mongoose.connection.on('error', console.error.bind(console, 'DB CONNECTION ERROR'));
+mongoose.connection.once('open', console.log.bind(console, 'DB CONNECTION OK'));
 
 routes = {
     index: require('./routes'),
@@ -56,21 +69,49 @@ routes = {
     refuel: require('./routes/refuel')
 };
 
-var authorization = function (request, response, next) {
-    if (request.session.user_id) {
-        next.apply(this);
-    } else {
-        response.redirect('/login');
-    }
-};
+User = mongoose.model('User');
+
+passport.serializeUser(User.serialize.bind(User));
+passport.deserializeUser(User.deserialize.bind(User));
+
+passport.use(new GoogleStrategy({
+    returnURL: 'http://localhost:3000/auth/google/return',
+    realm: 'http://localhost:3000/'
+},
+function(identifier, profile, done) {
+    process.nextTick(function () {
+        User.findOne({ email: profile.emails[0].value }, function (error, user) {
+            var newUser;
+            if (!user) {
+                newUser = new User();
+                newUser.set({
+                    email: profile.emails[0].value,
+                    first_name: profile.name.givenName,
+                    last_name: profile.name.familyName
+                });
+                
+                newUser.save(function (error) {
+                    return User.deserialize(profile.emails[0].value, done);
+                });
+            } else {
+                return User.deserialize(profile.emails[0].value, done);
+            }
+        });
+    });
+}));
+
+app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google/return', passport.authenticate('google', {
+    successRedirect: '/refuels',
+    failureRedirect: '/login'
+}));
 
 app.get('/', routes.index.index);
-
-app.all('/login', routes.user.login);
-app.post('/register', routes.user.register);
-app.get('/refuels', authorization, routes.refuel.list);
-app.all('/refuels/create', authorization, routes.refuel.create);
+app.get('/login', routes.user.login);
+app.get('/logout', routes.user.logout);
+app.get('/refuels', ensureAuthorization, routes.refuel.list);
+app.all('/refuels/create', ensureAuthorization, routes.refuel.create);
 
 http.createServer(app).listen(app.get('port'), function () {
-    console.log("Express server listening on port " + app.get('port'));
+    console.log('try the application from: http://localhost:3000');
 });

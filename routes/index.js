@@ -1,16 +1,5 @@
 exports.index = function (request, response) {
-    var data = {
-        title: 'mi sitio',
-        user: ''
-    };
-    
-    if (request.session.user_id) {
-        data.user = request.session.user_id;
-        response.redirect('/refuels');
-        // response.render('index', data);
-    } else {
-        response.redirect('/login');
-    }
+    response.redirect('/refuels');
 };
 
 /*

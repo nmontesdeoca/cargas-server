@@ -1,7 +1,7 @@
 var Refuel = require('mongoose').model('Refuel');
 
 exports.list = function (request, response) {
-    Refuel.find({ user: request.session.user_id }, function (error, refuels) {
+    Refuel.find({ user: request.user._id }, function (error, refuels) {
         if (error) {
             return response.json({
                 error: error
@@ -26,7 +26,7 @@ exports.create = function (request, response) {
             cost: request.body.cost,
             capacity: request.body.capacity,
             kilometers: request.body.kilometers,
-            user: request.session.user_id
+            user: request.user._id
         });
 
         refuel.save(function (error) {

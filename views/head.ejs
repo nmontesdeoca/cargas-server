@@ -29,9 +29,20 @@
     </head>
     <body>
         <!-- Make sure all your bars are the first things in your <body> -->
-        <header class="bar-nav">
+        <header class="bar-title">
             <h1 class="title"><%= title %></h1>
         </header>
+
+        <nav class="bar-tab">
+            <ul class="tab-inner">
+                <li class="tab-item">
+                    <a href="/refuels/create" data-transition="fade">
+                        <span class="icon icon-share"></span>
+                        <div class="tab-label">Agregar</div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
         <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
         <div class="content">
