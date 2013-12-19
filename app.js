@@ -4,7 +4,6 @@ var express = require('express'),
     http = require('http'),
     path = require('path'),
     routes,
-    config = require('./config'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     models_path = __dirname + '/models',
@@ -46,8 +45,8 @@ app.configure(function () {
     app.use(app.router);
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
     app.use(express.static(path.join(__dirname, 'public')));
-    app.set('db', process.env.db || config.db[app.get('env')]);
-    app.set('domain', process.env.domain || config.domain);
+    app.set('db', process.env.db || require('./config').db[app.get('env')]);
+    app.set('domain', process.env.domain || require('./config').domain);
 });
 
 app.configure('development', function () {
