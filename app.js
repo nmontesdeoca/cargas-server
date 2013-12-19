@@ -4,6 +4,7 @@ var express = require('express'),
     http = require('http'),
     path = require('path'),
     routes,
+    config = require('./config'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     models_path = __dirname + '/models',
@@ -45,7 +46,8 @@ app.configure(function () {
     app.use(app.router);
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
     app.use(express.static(path.join(__dirname, 'public')));
-    app.set('db', process.env.db || require('./config').db[app.get('env')])
+    app.set('db', process.env.db || config.db[app.get('env')]);
+    app.set('domain', process.env.domain || config.domain);
 });
 
 app.configure('development', function () {
@@ -75,8 +77,8 @@ passport.serializeUser(User.serialize.bind(User));
 passport.deserializeUser(User.deserialize.bind(User));
 
 passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:3000/auth/google/return',
-    realm: 'http://localhost:3000/'
+    returnURL: app.get('domain') + 'auth/google/return',
+    realm: app.get('domain')
 },
 function(identifier, profile, done) {
     process.nextTick(function () {
@@ -111,6 +113,36 @@ app.get('/login', routes.user.login);
 app.get('/logout', routes.user.logout);
 app.get('/refuels', ensureAuthorization, routes.refuel.list);
 app.all('/refuels/create', ensureAuthorization, routes.refuel.create);
+
+/*
+// Only to create or set the fuel prices
+app.get('/fuels', function (request, response) {
+    var Fuel = mongoose.model('Fuel'),
+        premium = new Fuel(),
+        gasoil = new Fuel(),
+        super95 = new Fuel();
+
+    premium.set({
+        name: 'Premium 97 SP',
+        cost: 42.10
+    });
+    premium.save();
+
+    gasoil.set({
+        name: 'Gasoil',
+        cost: 38.70
+    });
+    gasoil.save();
+
+    super95.set({
+        name: 'Super 95 SP',
+        cost: 40.60
+    });
+    super95.save();
+
+    response.send('Combustibles actualizados');
+});
+*/
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('try the application from: http://localhost:3000');

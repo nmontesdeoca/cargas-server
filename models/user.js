@@ -14,7 +14,7 @@ UserSchema = new Schema({
         type: String,
         lowercase: true
     },
-    created_at: { type: Date },
+    created_at: { type: Date, default: Date.now },
     updated_at: { type: Date }
 });
 
@@ -35,11 +35,7 @@ _.extend(UserSchema.statics, {
         return UserSchema.statics.makeRandom(256);
     },
     preSave: function (next) {
-        var self = this;
         this.updated_at = new Date;
-        if (this.isNew) {
-            this.created_at = new Date;
-        }
         next.apply(this);
     },
     makeToken: function () {
