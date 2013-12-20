@@ -17,6 +17,13 @@
         "passport": "*",
         "passport-twitter": "*",
         "passport-google": "*",
-        "passport-facebook": "*"
+        "passport-facebook": "*",
+
+        "koa": "*",
+        "koa-static": "*",
+        "koa-logger": "*",
+        "koa-route": "*",
+        "co-views": "*",
+        "co-body": "*"
     }
 }
