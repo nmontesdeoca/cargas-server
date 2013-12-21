@@ -12,7 +12,7 @@ app.use(require('koa-logger')());
 app.use(require('koa-static')(__dirname + '/public'));
 
 // require test modules
-app.use(mount(require('./modules/test')));
+app.use(mount(require('./modules/testnico')));
 
 // server start listening
 app.listen(3000);

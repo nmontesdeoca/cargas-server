@@ -1,0 +1,9 @@
+{
+    "name": "cargas-user",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "koa-route": "*",
+        "co-views": "*"
+    }
+}

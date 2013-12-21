@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start": "node app",
-        "preinstall": "npm ln test modules/test/"
+        "preinstall": "cd modules/testnico; npm install; cd ../testnico2; npm install;"
     },
     "engines": {
         "node": "0.11.9"
