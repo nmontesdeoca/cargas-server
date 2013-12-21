@@ -1,9 +1,10 @@
 {
-    "name": "CarGas",
+    "name": "cargas",
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start": "node app"
+        "start": "node app",
+        "preinstall": "npm ln test modules/test/"
     },
     "engines": {
         "node": "0.11.9"
@@ -22,9 +23,10 @@
         "koa": "*",
         "koa-static": "*",
         "koa-logger": "*",
-        "koa-route": "*",
+        
+        "koa-mount": "*",
         "koa-response-time": "*",
-        "co-views": "*",
+        
         "co-body": "*"
     }
 }

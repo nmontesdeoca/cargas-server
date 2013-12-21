@@ -1,5 +1,6 @@
 var koa = require('koa'),
-    app = koa();
+    app = koa(),
+    mount = require('koa-mount');
 
 // x-response-time
 app.use(require('koa-response-time')());
@@ -10,8 +11,8 @@ app.use(require('koa-logger')());
 // static files
 app.use(require('koa-static')(__dirname + '/public'));
 
-// configuring routes
-app.use(require('./config/routes')(app));
+// require test modules
+app.use(mount(require('./modules/test')));
 
 // server start listening
 app.listen(3000);
