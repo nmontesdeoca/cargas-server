@@ -23,6 +23,7 @@
         "koa-static": "*",
         "koa-logger": "*",
         "koa-route": "*",
+        "koa-response-time": "*",
         "co-views": "*",
         "co-body": "*"
     }
