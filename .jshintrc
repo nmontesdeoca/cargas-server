@@ -13,7 +13,7 @@
     "laxcomma" : false,
     "asi" : false,
     "scripturl" : false,
-    "bitwise" : true,
+    "bitwise" : false,
     "eqeqeq" : true,
     "shadow" : false,
     "expr" : false,

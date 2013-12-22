@@ -1,41 +1,50 @@
 var koa = require('koa'),
     app = koa(),
-    mount = require('koa-mount');
-
-// x-response-time
-app.use(require('koa-response-time')());
-
-// logger
-app.use(require('koa-logger')());
-
-// static files
-app.use(require('koa-static')(__dirname + '/public'));
-
-// require test modules
-app.use(mount(require('./modules/testnico')));
-
-// server start listening
-app.listen(process.env.PORT || 3000);
-console.log('listening on port 3000');
+    utils = require('./lib/utils'),
+    mongoose = require('mongoose');
 
 /**
- * EXAMPLES
- *
-// response
-app.use(route.get('/', function * () {
-    this.body = yield render('user/login', { title: 'Hello World' });
-}));
+ * x-response-time
+ */
+app.use(require('koa-response-time')());
 
-// body parsing
-app.use(function * (next) {
-    if ('POST' !== this.method) {
-        return yield next;
-    }
-    var body = yield parse(this, { limit: '1kb' });
-    if (!body.name) {
-        this.throw(400, '.name required');
-    }
-    this.body = { name: body.name.toUpperCase() };
-});
+/**
+ * logger
+ */
+app.use(require('koa-logger')());
 
-*/
+/**
+ * serve static files
+ */
+app.use(require('koa-static')(__dirname + '/public'));
+
+/**
+ * bootstrap models
+ */
+utils.requirePath(__dirname + '/models');
+
+/**
+ * bootstrap ejs filters
+ */
+utils.requirePath(__dirname + '/views/filters');
+
+/**
+ * configure application
+ */
+require('');
+
+/**
+ * bootstrap database connection
+ */
+mongoose.connect(app.get('database'));
+
+/**
+ * body parsing
+ */
+app.use(require('./lib/body-parser')());
+
+/**
+ * server starts listening
+ */
+app.listen(process.env.PORT || 3000);
+console.log('listening on port ' + (process.env.PORT || 3000));

@@ -3,30 +3,24 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start": "node app",
-        "preinstall": "cd modules/testnico; npm install; cd ../testnico2; npm install;"
+        "start": "node app"
     },
     "engines": {
         "node": "0.11.9"
     },
     "dependencies": {
-        "express": "3.1.0",
         "ejs": "*",
-        "less-middleware": "*",
-        "mongoose": "*",
-        "underscore": "*",
-        "passport": "*",
-        "passport-twitter": "*",
-        "passport-google": "*",
-        "passport-facebook": "*",
-
+        
         "koa": "*",
         "koa-static": "*",
         "koa-logger": "*",
-        
         "koa-mount": "*",
+        "koa-route": "*",
         "koa-response-time": "*",
-        
-        "co-body": "*"
+
+        "co-body": "*",
+        "co-views": "*",
+
+        "mongoose": "*"
     }
 }
