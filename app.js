@@ -31,7 +31,7 @@ utils.requirePath(__dirname + '/views/filters');
 /**
  * configure application
  */
-require('');
+require('./config/app');
 
 /**
  * bootstrap database connection

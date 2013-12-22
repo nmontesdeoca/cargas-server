@@ -1,1 +1,1 @@
-exports.db = process.env.DB || require('./database').db;
+exports.db = process.env.db || require('./database').db;
