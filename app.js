@@ -21,22 +21,17 @@ app.use(require('koa-static')(__dirname + '/public'));
 /**
  * bootstrap models
  */
-utils.requirePath(__dirname + '/models');
+utils.requirePath(__dirname + '/app/models');
 
 /**
  * bootstrap ejs filters
  */
-utils.requirePath(__dirname + '/views/filters');
-
-/**
- * configure application
- */
-require('./config/app');
+utils.requirePath(__dirname + '/app/views/filters');
 
 /**
  * bootstrap database connection
  */
-mongoose.connect(app.get('database'));
+mongoose.connect(require('./config/app').db);
 
 /**
  * body parsing
