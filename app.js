@@ -21,6 +21,7 @@ app.use(require('koa-static')(__dirname + '/public'));
 /**
  * bootstrap models
  */
+console.log(__dirname + '/app/models');
 utils.requirePath(__dirname + '/app/models');
 
 /**
