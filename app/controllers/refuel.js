@@ -1,43 +1,41 @@
-var Refuel = require('mongoose').model('Refuel');
+var Refuel = require('mongoose').model('Refuel'),
+    views = require('co-views'),
+    render = views(__dirname + '/../views', { ext: 'ejs' });
 
-exports.list = function (request, response) {
-    Refuel.find({ user: request.user._id }, function (error, refuels) {
-        if (error) {
-            return response.json({
-                error: error
-            });
-        }        
-        response.render('refuel/list', {
-            title: 'Mis recargas',
-            refuels: refuels
-        });
+/**
+ * render all the refuels for the user logged in
+ * @type {Generator}
+ */
+exports.list = function * () {
+    this.body = yield render('refuel/list', {
+        title: 'Mis recargas',
+        refuels: yield Refuel.find({
+            user: '52b251c65308e4862a000001'
+        }).exec()
     });
 };
 
-exports.create = function (request, response) {
+/**
+ * if the request method is GET, render the form
+ * if the request method is POST, create a new Refuel with the body parameters as data
+ * @type {Generator}
+ */
+exports.create = function * () {
     var refuel;
 
-    if (request.method === 'GET') {
-        response.render('refuel/create', { title: 'Ingresa una recarga' });
-    } else if (request.method === 'POST') {
+    if (this.method === 'GET') {
+        this.body = yield render('refuel/create', { title: 'Ingresa una recarga' });
+    } else if (this.method === 'POST') {
         refuel = new Refuel();
 
         refuel.set({
-            cost: request.body.cost,
-            capacity: request.body.capacity,
-            kilometers: request.body.kilometers,
-            user: request.user._id
+            cost: this.request.body.cost,
+            capacity: this.request.body.capacity,
+            kilometers: this.request.body.kilometers,
+            user: '52b251c65308e4862a000001'
         });
 
-        refuel.save(function (error) {
-            if (error) {
-                response.json({
-                    success: false,
-                    error: error
-                });
-                return;
-            }
-            response.redirect('/refuels');
-        });
+        refuel.save();
+        this.redirect('/refuels');
     }
 };

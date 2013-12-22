@@ -1,8 +1,11 @@
-exports.login = function (request, response) {
-    response.render('user/login', { title: 'Entrar' });
+var views = require('co-views'),
+    render = views(__dirname + '/../views', { ext: 'ejs' });
+
+exports.login = function * () {
+    this.body = yield render('user/login', { title: 'Entrar' });
 };
 
-exports.logout = function (request, response) {
-    request.logout();
-    response.redirect('/login');
+exports.logout = function * () {
+    // TODO: implement
+    yield [];
 };

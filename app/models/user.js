@@ -3,18 +3,14 @@ var mongoose = require('mongoose'),
     UserSchema;
 
 UserSchema = new Schema({
-    first_name: {
-        type: String
-    },
-    last_name: {
-        type: String
-    },
+    first_name: String,
+    last_name: String,
     email: {
         type: String,
         lowercase: true
     },
     created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date }
+    updated_at: Date
 });
 
 if (!UserSchema.options.toObject) {

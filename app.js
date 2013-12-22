@@ -40,6 +40,11 @@ mongoose.connect(require('./config/app').db);
 app.use(require('./lib/body-parser')());
 
 /**
+ * configure all the routes
+ */
+require('./config/routes')(app);
+
+/**
  * server starts listening
  */
 app.listen(process.env.PORT || 3000);
