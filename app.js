@@ -1,20 +1,22 @@
-var express = require('express'),
-    fs = require('fs'),
-    app = express(),
+var koa = require('koa'),
+    app = koa(),
     utils = require('./lib/utils'),
-    mongoose = require('mongoose'),
-    passport = require('passport');
-
+    mongoose = require('mongoose');
 
 /**
- * configure application
+ * x-response-time
  */
-require('./config/express')(app, express, passport);
+app.use(require('koa-response-time')());
 
 /**
- * configure passport
+ * logger
  */
-require('./config/passport')(passport);
+app.use(require('koa-logger')());
+
+/**
+ * serve static files
+ */
+app.use(require('koa-static')(__dirname + '/public'));
 
 /**
  * bootstrap models
@@ -27,13 +29,22 @@ utils.requirePath(__dirname + '/models');
 utils.requirePath(__dirname + '/views/filters');
 
 /**
- * bootstrap db connection
+ * configure application
  */
-mongoose.connect(app.get('db'));
-mongoose.connection.on('error', console.error.bind(console, 'db connection error'));
-mongoose.connection.once('open', console.log.bind(console, 'db connection ok'));
+require('');
 
+/**
+ * bootstrap database connection
+ */
+mongoose.connect(app.get('database'));
 
+/**
+ * body parsing
+ */
+app.use(require('./lib/body-parser')());
 
-app.listen(app.get('port'));
-console.log('try the application from: http://localhost:3000');
+/**
+ * server starts listening
+ */
+app.listen(process.env.PORT || 3000);
+console.log('listening on port ' + (process.env.PORT || 3000));

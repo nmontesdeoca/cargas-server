@@ -1,1 +1,1 @@
-web: node --harmony koa.js
+web: node --harmony app.js
