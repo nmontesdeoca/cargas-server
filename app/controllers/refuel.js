@@ -39,3 +39,10 @@ exports.create = function * () {
         this.redirect('/refuels');
     }
 };
+
+exports.delete = function * (refuel_id) {
+    var refuel = yield Refuel.findOne({ _id: refuel_id }).exec();
+
+    refuel.remove();
+    this.redirect('/refuels');
+};

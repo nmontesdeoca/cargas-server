@@ -1,15 +1,13 @@
 <% include ../head %>
 
-    <a href="/refuels/create" class="button pull-right">Agregar Recarga</a>
-
-    <ul class="table-view">
+    <ul class="list">
         <% for (var i = 0, length = refuels.length; i < length; i++) { %>
-        <li class="table-view-cell">
+        <li>
             <strong>$<%= refuels[i].get('cost') %></strong>
             <p><%= refuels[i].get('kilometers') %> kms</p>
             <p><%= refuels[i].get('capacity') %> lts</p>
             <p><%=: refuels[i].get('created_at') | date %></p>
-
+            <a href="/refuels/<%= refuels[i].get('_id') %>/delete" class="button-negative" data-ignore="push">Eliminar</a>
         </li>
         <% } %>
     </ul>
