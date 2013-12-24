@@ -1,0 +1,184 @@
+@import "mixins.scss";
+
+//
+// Variable overrides
+// --------------------------------------------------
+
+// Color overrides
+// --------------------------------------------------
+
+// Main theme colors
+$primary-color: #1eb0e9;
+$chrome-color: rgba(30,176,233,.98);
+
+// Action colors
+$default-color:  rgba(0, 0, 0, .3);
+$positive-color: #34ba15;
+$negative-color: #e71e1e;
+
+// Global
+// --------------------------------------------------
+
+.bar-header-secondary ~ .content {
+  padding-top: 108px;
+}
+
+
+// Bars
+// --------------------------------------------------
+[class*="bar-"] {
+  background-color: $chrome-color;
+
+  &.bar-standard,
+  &.bar-footer-secondary {
+    background-color: rgba(245,245,245,.98);
+  }
+}
+.bar-nav {
+  top: 20px;
+  @include box-shadow(0 -20px 0 rgba(30,176,233,.98), 0 0 1px rgba(0, 0, 0, 0.85));
+}
+[class*="bar-"].bar-header-secondary {
+  top: 64px;
+}
+.title {
+  color: #fff;
+}
+.tab-label {
+  color: rgba(255,255,255,.5);
+}
+.tab-item.active .tab-label {
+  color: rgba(255,255,255,1);
+}
+
+// Buttons
+// --------------------------------------------------
+
+[class*="button"] {
+  color: $default-color;
+  border-color: $default-color;
+
+  &:active,
+  &.active,
+  &.button-filled {
+    background-color: $default-color;
+  }
+}
+
+// Primary button (Default color is blue)
+.button-primary {
+  color: $primary-color;
+  border-color: $primary-color;
+
+  &:active,
+  &.active,
+  &.button-filled {
+    background-color: $primary-color;
+  }
+}
+
+// Positive button (Default color is green)
+.button-positive {
+  color: $positive-color;
+  border-color: $positive-color;
+
+  &:active,
+  &.active,
+  &.button-filled {
+    background-color: $positive-color;
+  }
+}
+
+// Negative button (Default color is red)
+.button-negative {
+  color: $negative-color;
+  border-color: $negative-color;
+
+  &:active,
+  &.active,
+  &.button-filled {
+    background-color: $negative-color;
+  }
+}
+
+.bar-title {
+
+  // Generic style for all buttons in .bar-title
+  [class*="button"] {
+    color: #fff;
+  }
+
+  // Override standard button active states
+  .button:active,
+  .button.active,
+  .button-prev:active,
+  .button-prev.active,
+  .button-next:active,
+  .button-next.active,
+  .button-primary:active,
+  .button-primary.active {
+    color: #fff;
+  }
+
+
+  // Directional buttons in nav bars
+  // --------------------------------------------------
+
+  .button-prev:before,
+  .button-prev:after,
+  .button-next:before,
+  .button-next:after {
+    background-color: #fff;
+  }
+}
+
+
+// Segmented controllers
+// --------------------------------------------------
+
+.segmented-controller {
+  border-color: $primary-color;
+
+  li {
+    border-left-color: $primary-color;
+
+    // Link that fills each section
+    > a {    
+      color: $primary-color;
+    }
+
+    // Active segment of controller
+    &.selected {
+      background-color: $primary-color;
+    }
+  }
+}
+
+// Segmented controller in all bars
+// --------------------------------------------------
+.bar-title .segmented-controller {
+  border-color: #fff;
+
+  li {
+    border-left-color: #fff;
+
+    // Link that fills each section
+    > a {    
+      color: #fff;
+    }
+
+    // Active segment of controller
+    &.selected {
+      background-color: rgba(255,255,255,.4);
+    }
+  }
+}
+
+
+// Forms
+// --------------------------------------------------
+// Fully round search input
+input[type=search] {
+  color: #555;
+  background-color: rgba(0,0,0,.1);
+}

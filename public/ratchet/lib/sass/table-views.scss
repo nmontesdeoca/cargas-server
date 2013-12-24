@@ -1,0 +1,150 @@
+//
+// Table views
+// --------------------------------------------------
+
+.table-view {
+  padding: 0;
+  margin: 0;
+  list-style: none; // Remove usual bullet styles from table view
+  background-color: #fff;
+
+  // Pad each table view item and add dividers
+  .table-view-cell {
+    position: relative;
+    padding: 11px 60px 12px 15px; // Given extra right padding to accomodate badges, chevrons or buttons. Extra 1px bottom padding given for hairline divider.
+    border-bottom: $border-default;
+
+    // Remove the border from the last table view item
+    &:last-child { 
+      border-bottom: 0;
+    }
+    // If it's a table view of links, make sure the child <a> takes up full table view item tap area (want to avoid selecting child buttons though)
+    > a:not([class*="button"]) {
+      position: relative;
+      display: block;
+      padding: inherit;
+      margin: -11px -60px -12px -15px; // Make the entire list item tappable.
+      color: inherit;
+
+      &:active {
+        background-color: #eee;
+      }
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+
+  // Inset table views (Will be deprecated and changed into `.card` component)
+  // --------------------------------------------------
+
+  &.inset {
+    width: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: $border-radius;
+
+    // Remove border from last standard list items to avoid double border at top/bottom of table views
+    li:last-child {
+      background-image: none;
+    }
+  }
+
+
+  // Table view dividers
+  // --------------------------------------------------
+
+  .table-view-divider {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 15px;
+    margin-top: -1px; // Hides the border of the previous list item  
+    margin-left: 0;
+    color: #999;
+    font-weight: $font-weight;
+    border-top: $border-default;
+    border-bottom: $border-default;
+    background-color: #fafafa;
+
+    // Rounding first divider on inset lists and remove border on the top
+    &:first-child {
+      top: 0;
+      border-radius: $border-radius $border-radius 0 0;
+    }
+
+    // Rounding last divider on inset table views
+    &:last-child {
+      border-radius: 0 0 $border-radius $border-radius;
+    }
+  }
+
+
+  // Right-aligned subcontent in table views (chevrons, buttons, badges and toggles)
+  // -------------------------------------------------------------------------------
+
+  .chevron,
+  [class*="button"],
+  [class*="badge"],
+  .toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+  }
+
+  // Position chevrons/badges vertically centered on the right in table view items
+  .chevron,
+  [class*="badge"] {
+    margin-top: -10px; // Half height of chevron
+  }
+
+  // Push badge over if there's a sibling chevron
+  .chevron + [class*="badge"] {
+    right: 30px;
+  }
+
+  // Position buttons vertically centered on the right in table view items
+  [class*="button"] {
+    left: auto;
+    margin-top: -12px; // Half height of button
+  }
+
+  .toggle {
+    margin-top: -15px; // Half height of toggle
+  }
+}
+
+// Indented table views
+// --------------------------------------------------
+
+.table-view-indented .table-view-cell {
+  padding-left: 59px;
+  background-position-x: 59px; // Make room for your left aligned media/icons.
+
+  > a:not([class*="button"]) {
+    margin-left: -59px;
+  }
+
+  > .pull-left,
+  > a:not([class*="button"]) .pull-left {
+    position: absolute;
+    left: 15px;
+    z-index: 1;
+  }
+}
+
+// Table views in popovers
+// --------------------------------------------------
+
+.popover .table-view {
+  width: auto;
+  max-height: 300px;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  overflow: auto;
+  background-color: #fff;
+  border-radius: $border-radius;
+  -webkit-overflow-scrolling: touch;
+}

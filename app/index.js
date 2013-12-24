@@ -10,3 +10,8 @@ require('../config/express')(app, express);
  * require all modules into the application
  */
 require('../lib/utils').requireModules(__dirname + '/modules', app);
+
+/**
+ * bootstrap passport configuration
+ */
+require('../config/passport')(require('passport'), require('../config/config')(app));

@@ -1,0 +1,23 @@
+<% include ../../../views/head %>
+
+<form action="/login" method="post">
+    <div class="input-group">
+        <div class="input-row">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="nico@cargas.com">
+        </div>
+        <div class="input-row">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="secret">
+        </div>
+        <button class="button-block">Entrar</button>
+    </div>
+</form>
+
+<a href="/auth/twitter" data-ignore="push">Twitter</a>
+<a href="/auth/facebook" data-ignore="push">Facebook</a>
+<a href="/auth/google" data-ignore="push">Google</a>
+
+<a onclick="window.location.assign('http://www.google.com.uy');" href="#" data-transition="slide">GOOGLE BROWSE</a>
+
+<% include ../../../views/foot %>

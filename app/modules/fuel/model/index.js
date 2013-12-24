@@ -10,7 +10,7 @@ FuelSchema = new Schema({
 });
 
 FuelSchema.statics.preSave = function (next) {
-    this.updated_at = new Date;
+    this.updated_at = new Date();
     next.apply(this);
 };
 

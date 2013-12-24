@@ -1,7 +1,8 @@
-var controller = require('../controller');
+var controller = require('../controller'),
+    authorization = require('../../../middlewares/authorization');
 
 module.exports = function (app) {
-    app.get('/refuels', controller.list);
+    app.get('/refuels', authorization.requiresLogin, controller.list);
     app.get('/refuels/create', controller.form);
     app.post('/refuels/create', controller.create);
     app.get('/refuels/edit', controller.form);

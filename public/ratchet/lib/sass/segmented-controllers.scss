@@ -1,0 +1,84 @@
+//
+// Segmented controllers
+// --------------------------------------------------
+
+.segmented-controller {
+  display: -webkit-box;
+  display: box;
+  padding: 0;
+  margin: 0 0 10px 0;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: $font-weight-light;
+  list-style: none;
+  background-color: $chrome-color;
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  @include box-orient(horizontal);
+
+  // Section within controller
+  li {
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    border-left: 1px solid $primary-color;
+    @include box-flex(1);
+    
+    // Link that fills each section
+    > a {
+      display: block;
+      padding: 6px 16px 7px;
+      overflow: hidden;
+      line-height: 1;
+      color: $primary-color;
+      text-overflow: ellipsis;
+    }
+
+    // Remove border-left and shadow from first section
+    &:first-child {
+      border-left-width: 0;
+    }
+
+    // Active state of segmented controller
+    &:active {
+      background-color: rgba(213,233,255,1);
+    }
+
+    // Selected segment of controller
+    &.selected {
+      background-color: $primary-color;
+
+      // Set color of links to white
+      > a {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.segmented-controller-item {
+  display: none;
+
+  &.selected {
+    display: block;
+  }
+}
+
+
+// Segmented controller in all bars
+// --------------------------------------------------
+
+// Remove standard segmented bottom margin
+[class*="bar-"] .segmented-controller {
+  margin: 3px 0;
+  @include box-flex(1);
+}
+.bar-nav .segmented-controller {
+  margin-bottom: 4px;
+}
+
+// Add margins between segmented controllers and buttons
+[class*="bar-"] .segmented-controller + [class*="button"],
+[class*="bar-"] [class*="button"] + .segmented-controller {
+  margin-left: $bar-side-spacing; // Equal to the right and left padding on buttons & icons
+}

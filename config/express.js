@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    passport = require('passport');
 
 module.exports = function (app, express) {
     app.configure(function () {
@@ -13,6 +14,8 @@ module.exports = function (app, express) {
         app.use(express.methodOverride());
         app.use(express.cookieParser('car_gas_secret_here'));
         app.use(express.session());
+        app.use(passport.initialize());
+        app.use(passport.session());
         app.use(app.router);
         app.use(express.static(__dirname + '/../public'));
     });

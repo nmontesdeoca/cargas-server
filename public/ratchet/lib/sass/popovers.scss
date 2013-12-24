@@ -1,0 +1,53 @@
+//
+// Popovers (to be used with popovers.js)
+// --------------------------------------------------
+
+.popover {
+  position: fixed;
+  top: 55px;
+  left: 50%;
+  z-index: 20;
+  display: none;
+  width: 280px;
+  margin-left: -140px;
+  background-color: $chrome-color;
+  border-radius: $border-radius;
+  opacity: 0;
+  box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+  @include transform(translate3d(0, -15px, 0));
+
+  // Caret on top of popover using CSS triangles (thanks to @chriscoyier for solution)
+  &:after {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -15px;
+    content: '';
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid $chrome-color;
+    border-left: 15px solid transparent;
+  }
+
+  // Popover animation
+  // --------------------------------------------------
+
+  &.visible {
+    opacity: 1;
+    @include transform(translate3d(0, 0, 0));
+  }
+}
+
+// Backdrop (used as invisible touch escape)
+// --------------------------------------------------
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0,0,0,.15);
+}

@@ -13,7 +13,8 @@
         "ejs": "*",
         "mongoose": "*",
         "passport": "*",
-        "passport-google": "*",
+        "passport-local": "*",
+        "passport-google-oauth": "*",
         "passport-twitter": "*",
         "passport-facebook": "*"
     }
