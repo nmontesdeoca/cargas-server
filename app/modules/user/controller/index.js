@@ -32,7 +32,7 @@ module.exports = {
         response.render('login', { title: 'Entrar' });
     },
     login: function (request, response) {
-        this.authCallback(request, response);
+        module.exports.authCallback(request, response);
     },
     signin: function (request, response) {},
     authCallback: function (request, response) {

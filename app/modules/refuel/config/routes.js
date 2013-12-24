@@ -3,9 +3,9 @@ var controller = require('../controller'),
 
 module.exports = function (app) {
     app.get('/refuels', authorization.requiresLogin, controller.list);
-    app.get('/refuels/create', controller.form);
-    app.post('/refuels/create', controller.create);
-    app.get('/refuels/edit', controller.form);
-    app.put('/refuels/edit', controller.edit);
-    app.get('/refuels/:id/delete', controller.delete);
+    app.get('/refuels/create', authorization.requiresLogin, controller.form);
+    app.post('/refuels/create', authorization.requiresLogin, controller.create);
+    app.get('/refuels/edit', authorization.requiresLogin, controller.form);
+    app.put('/refuels/edit', authorization.requiresLogin, controller.edit);
+    app.get('/refuels/:id/delete', authorization.requiresLogin, controller.delete);
 };

@@ -33,10 +33,8 @@ if (!UserSchema.options.toObject) {
 }
 
 UserSchema.options.toObject.transform = function (document, result, options) {
-    /**
-     * remove the _id of every document before returning the result
-     */
-    delete result._id;
+    delete result.salt;
+    delete result.hashed_password;
 };
 
 /**

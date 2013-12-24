@@ -6,8 +6,15 @@ module.exports = {
             response.render('list', { title: 'Mis recargas', refuels: refuels });
         });
     },
-    form: function (request, response) {},
-    create: function (request, response) {},
+    form: function (request, response) {
+        response.render('form', { title: 'Agregar' });
+    },
+    create: function (request, response) {
+        request.body.user = request.user._id;
+        new Refuel(request.body).save();
+        
+        response.redirect('/refuels');
+    },
     edit: function (request, response) {},
     delete: function (request, response) {}
 };
