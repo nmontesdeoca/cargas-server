@@ -1,17 +1,12 @@
-var express = require('express'),
-    app = module.exports = express();
-
-/**
- * configure express application
- */
-app.configure(function () {
-    app.set('name', 'user');
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'ejs');
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.use(app.router);
-});
+var application_factory = require('../../../lib/application/factory'),
+    app = module.exports = application_factory.newApplication({
+        name: 'user',
+        views: __dirname + '/views',
+        viewEngine: 'ejs',
+        bodyParser: true,
+        methodOverride: true,
+        router: true
+    });
 
 /**
  * bootstrap model

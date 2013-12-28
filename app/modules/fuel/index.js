@@ -1,13 +1,7 @@
-var express = require('express'),
-    app = module.exports = express();
-
-/**
- * configure express application
- */
-app.configure(function () {
-    app.set('name', 'fuel');
-    // app.use(app.router);
-});
+var application_factory = require('../../../lib/application/factory'),
+    app = module.exports = application_factory.newApplication({
+        name: 'usefuel'
+    });
 
 /**
  * configure routes

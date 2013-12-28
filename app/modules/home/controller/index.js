@@ -5,5 +5,10 @@ module.exports = {
          * que me parece mas productivo para un usuario, para ya ponerse a ingresar los datos
          */
         response.redirect('/refuels');
+    },
+    beta: function (request, response) {
+        require('mongoose').model('Refuel').find({ user: request.user._id }, function (error, refuels) {
+            response.render('beta', { title: 'beta', refuels: refuels });
+        });
     }
 };

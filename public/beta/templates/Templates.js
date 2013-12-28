@@ -1,0 +1,1 @@
+define([], function () { return {"index":"<h1>HOLA <a href=\"#\" class=\"view-detail\"><%= name %></a></h1>","refuel":"<strong>$<%= cost %></strong>\n<p><%= kilometers %> kms</p>\n<p><%= capacity %> lts</p>\n<p><%= created_at %></p>\n<a href=\"/refuels/<%= _id %>/delete\" class=\"button-negative\">Eliminar</a>"}; });

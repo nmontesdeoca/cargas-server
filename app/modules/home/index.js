@@ -1,13 +1,10 @@
-var express = require('express'),
-    app = module.exports = express();
-
-/**
- * configure express application
- */
-app.configure(function () {
-    app.set('name', 'home');
-    app.use(app.router);
-});
+var application_factory = require('../../../lib/application/factory'),
+    app = module.exports = application_factory.newApplication({
+        name: 'home',
+        views: __dirname + '/view',
+        viewEngine: 'ejs',
+        router: true
+    });
 
 /**
  * configure routes
