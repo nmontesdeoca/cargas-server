@@ -1,7 +1,5 @@
-var controller = require('../controller'),
-    authorization = require('../../../middlewares/authorization');
+var controller = require('../controller');
 
 module.exports = function (app) {
     app.get('/', controller.home);
-    app.get('/beta', authorization.requiresLogin, controller.beta);
 };
