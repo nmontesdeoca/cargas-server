@@ -1,4 +1,26 @@
-        <!-- closes the .content div -->
-        </div>
-    </body>
+<!-- closes the .content div -->
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js"></script>
+
+<script>
+var Application =  {
+    modules: [],
+    initialize: function () {
+        var modules = this.modules;
+        require(modules, function () {
+            _.each(modules, function (module) {
+                require(module).mountToApp.apply(this, Application);
+            });
+            console.log('modules loaded');
+        });
+    }
+};
+</script>
+<script src="/javascripts/app.js"></script>
+<script src="/javascripts/app/starter.js"></script>
+
+</body>
 </html>
