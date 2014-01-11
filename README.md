@@ -1,66 +1,62 @@
 CarGas
+======
 
-Un usuario puede
-    crearse una cuenta
-    agregar sus autos
-    por cada auto puede
-        cuando hecha combustible (ideal)
-            ingresar kilometraje
-            ingresar litros cargados
-        revisar los datos
-            cargas que ha hecho
+Trata de ser una aplicacion orientada a moviles con el fin de permitirle a un usuario, registrar las recargas de combustible que le hace a su vehículo.
+
+Qué ve un usuario cuando entra a CarGas ?
+
+    Vé la página de login
+
+Y si ya estaba logueado ?
+
+    Vé el formulario para ingresar una nueva recarga
+
+Qué campos tiene el formulario de ingreso de recarga
+
+    kilometraje, tipo de combustible, costo o litros (solo uno de los dos es necesario, y el otro se calcula automaticamente con el precio del combustible).
+
+Qué puede hacer un usuario ?
+
+    * crearse una cuenta o entrar con una red social (facebook, twitter, google, etc.)
+    * ver su perfil y rellenarlo
+    * ver estadisticas sobre sus recargas
+    * ver historial de recargas
+    * ver los gastos realizados con sus recargas, por dia, por mes, por año
+    * podria tener varios vehiculos y esto sería una feature a tener en cuenta en el futuro.
 
 
-user
-    name        String
-    lastname    String
-    email       String
-    password    String
-    salt        String
-    created     Date
-    updated     Date
+Idea de modelos
 
-car
-    model       Number
+    User
+    first_name      String
+    last_name       String
+    provider        String
+    hashed_password String
+    salt            String
+    authToken       String
+    facebook        Object
+    twitter         Object
+    google          Object
+    created_at      Date
+    updated_at      Date
+
+    Car
+    model       ObjectID
     year        Number
-    created     Date
-    updated     Date
+    created_at  Date
+    updated_at  Date
 
-make
+    Make
     name        String
-    created     Date
-    updated     Date
+    created_at  Date
+    updated_at  Date
 
-model
+    Model
     name        String
-    make        Number
-    created     Date
-    updated     Date
+    make        ObjectID
+    created_at  Date
+    updated_at  Date
 
-// Only to create or set the fuel prices
-app.get('/fuels', function (request, response) {
-    var Fuel = mongoose.model('Fuel'),
-        premium = new Fuel(),
-        gasoil = new Fuel(),
-        super95 = new Fuel();
-
-    premium.set({
-        name: 'Premium 97 SP',
-        cost: 42.10
-    });
-    premium.save();
-
-    gasoil.set({
-        name: 'Gasoil',
-        cost: 38.70
-    });
-    gasoil.save();
-
-    super95.set({
-        name: 'Super 95 SP',
-        cost: 40.60
-    });
-    super95.save();
-
-    response.send('Combustibles actualizados');
-});
+    Fuel
+    name    String
+    cost    Number
