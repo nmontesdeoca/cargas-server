@@ -2,3 +2,7 @@
     /* in order to view buttons as anchors */
     width: 100%;
 }
+
+.list .edit {
+    right: 105px;
+}

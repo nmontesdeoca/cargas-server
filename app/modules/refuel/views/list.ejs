@@ -6,10 +6,11 @@
             <strong>$<%= refuels[i].get('cost') %></strong>
             <p><%= refuels[i].get('kilometers') %> kms</p>
             <p><%= refuels[i].get('capacity') %> lts</p>
-            <p><%=: refuels[i].get('created_at') | date %></p>
+            <p><%=: refuels[i].get('date') | date %></p>
+            <a href="/refuels/<%= refuels[i].get('_id') %>/edit" class="button edit">Editar</a>
             <a href="/refuels/<%= refuels[i].get('_id') %>/delete" class="button-negative">Eliminar</a>
         </li>
         <% } %>
     </ul>
 
-<% include ../../../views/foot %>    
+<% include ../../../views/foot %>

@@ -1,25 +1,28 @@
 <% include ../../../views/head %>
 
-    <form class="form" action="/refuels/create" method="post">
+    <% var action = refuel ? '/refuels/' + refuel.get('_id') + '/edit' : '/refuels/create' %>
+
+    <form class="form" action="<%= action %>" method="post">
 
         <div class="input-group">
             <div class="input-row">
                 <label>Costo $</label>
-                <input type="number" name="cost" placeholder="1620">
+                <input type="number" name="cost" placeholder="1620" value="<%= refuel ? refuel.get('cost') : '' %>">
             </div>
             <div class="input-row">
                 <label>Capacidad lts</label>
-                <input type="number" name="capacity" placeholder="45">
+                <input type="number" name="capacity" placeholder="45" value="<%= refuel ? refuel.get('capacity') : '' %>">
             </div>
             <div class="input-row">
                 <label>Kilometraje kms</label>
-                <input type="number" name="kilometers" placeholder="560">
+                <input type="number" name="kilometers" placeholder="560" value="<%= refuel ? refuel.get('kilometers') : '' %>">
             </div>
+            <% if (refuel) { %>
             <div class="input-row">
                 <label>Fecha</label>
-                <% var date = new Date(); %>
-                <input type="date" name="date" placeholder="16/12/2013" value="<%= date.getFullYear() %>-<%= date.getMonth() + 1 %>-<%= date.getDate() %>">
+                <input type="date" name="date" placeholder="16/12/2013" value="<%= refuel ? refuel.get('html_date'): '' %>">
             </div>
+            <% } %>
         </div>
         <button class="button button-block">Entrar</button>
     </div>

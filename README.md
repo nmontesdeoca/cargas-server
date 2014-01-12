@@ -22,7 +22,7 @@ Qué puede hacer un usuario ?
     * ver estadisticas sobre sus recargas
     * ver historial de recargas
     * ver los gastos realizados con sus recargas, por dia, por mes, por año
-    * podria tener varios vehiculos y esto sería una feature a tener en cuenta en el futuro.
+    * podria tener varios vehiculos
 
 
 Idea de modelos
@@ -37,12 +37,14 @@ Idea de modelos
     facebook        Object
     twitter         Object
     google          Object
+    cars            List (Car)
     created_at      Date
     updated_at      Date
 
     Car
     model       ObjectID
     year        Number
+    fuel        ObjectID
     created_at  Date
     updated_at  Date
 
