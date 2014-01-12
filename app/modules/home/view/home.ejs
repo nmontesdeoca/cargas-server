@@ -1,5 +1,41 @@
 <% include ../../../views/head %>
 
+<a href="/form">Form</a>
 
+<script type="text/template" id="refuel-form">
+<div class="input-group">
+    <div class="input-row">
+        <label>Costo $</label>
+        <input type="number" name="cost" placeholder="1620">
+    </div>
+    <div class="input-row">
+        <label>Capacidad lts</label>
+        <input type="number" name="capacity" placeholder="45">
+    </div>
+    <div class="input-row">
+        <label>Kilometraje kms</label>
+        <input type="number" name="kilometers" placeholder="560">
+    </div>
+</div>
+<button class="button button-block">Entrar</button>
+</script>
+
+<script type="text/template" id="refuel-list">
+<ul class="list">
+
+<@ refuels.each(function (refuel) { @>
+
+<li>
+    <strong>$<@= refuel.get('cost') @></strong>
+    <p><@= refuel.get('kilometers') @> kms</p>
+    <p><@= refuel.get('capacity') @> lts</p>
+    <p><@= refuel.get('created_at') @></p>
+    <a href="/refuels/<@= refuel.get('_id') @>/delete" class="button-negative">Eliminar</a>
+</li>
+
+<@ }); @>
+
+</ul>
+</script>
 
 <% include ../../../views/foot %>

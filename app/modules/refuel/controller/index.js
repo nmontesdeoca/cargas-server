@@ -12,9 +12,21 @@ module.exports = {
     create: function (request, response) {
         request.body.user = request.user._id;
         new Refuel(request.body).save();
-        
+
         response.redirect('/refuels');
     },
     edit: function (request, response) {},
-    delete: function (request, response) {}
+    delete: function (request, response) {},
+
+    createJSON: function (request, response) {
+        new Refuel(request.body).save(function (error, refuel) {
+            response.json(refuel);
+        });
+    },
+
+    listJSON: function (request, response) {
+        Refuel.find({ user: request.user._id }, function (error, refuels) {
+            response.json(refuels);
+        });
+    }
 };
