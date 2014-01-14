@@ -1,19 +1,12 @@
-module.exports = function (app) {
-    return {
-        facebook: {
-            clientID: 'APP_ID',
-            clientSecret: 'APP_SECRET',
-            callbackURL: app.get('domain') + '/auth/facebook/callback'
-        },
-        twitter: {
-            clientID: 'CONSUMER_KEY',
-            clientSecret: 'CONSUMER_SECRET',
-            callbackURL: app.get('domain') + '/auth/twitter/callback'
-        },
-        google: {
-            clientID: 'APP_ID',
-            clientSecret: 'APP_SECRET',
-            callbackURL: app.get('domain') + '/auth/google/callback'
-        }
-    };
+module.exports = function (config) {
+    config.facebook.clientID = 'APP_ID';
+    config.facebook.clientSecret = 'APP_SECRET';
+
+    config.twitter.clientID = 'APP_ID';
+    config.twitter.clientSecret = 'APP_SECRET';
+
+    config.google.clientID = 'APP_ID';
+    config.google.clientSecret = 'APP_SECRET';
+
+    return config;
 };
