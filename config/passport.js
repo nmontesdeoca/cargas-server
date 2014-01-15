@@ -58,7 +58,6 @@ module.exports = function (passport, config) {
                 if (!user) {
                     user = new User({
                         name: profile.displayName,
-                        username: profile.username,
                         provider: 'twitter',
                         twitter: profile._json
                     });
@@ -92,7 +91,6 @@ module.exports = function (passport, config) {
                     user = new User({
                         name: profile.displayName,
                         email: profile.emails[0].value,
-                        username: profile.username,
                         provider: 'facebook',
                         facebook: profile._json
                     });
@@ -123,7 +121,6 @@ module.exports = function (passport, config) {
                     user = new User({
                         name: profile.displayName,
                         email: profile.emails[0].value,
-                        username: profile.username,
                         provider: 'google',
                         google: profile._json
                     });

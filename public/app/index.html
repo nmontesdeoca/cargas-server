@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" ng-app="CarGas">
+<head>
+    <meta charset="utf-8">
+    <title>My AngularJS App</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body ng-controller="Main">
+    <header class="bar-title">
+        <h1 class="title">Title</h1>
+    </header>
+
+    <nav class="bar-tab">
+        <ul class="tab-inner">
+            <li class="tab-item {{ menu_selected === 'Home' ? 'active' : '' }}">
+                <a href="#/">
+                    <!--<img class="tab-icon" src="img/icon-home.png">-->
+                    <div class="tab-label">Home</div>
+                </a>
+            </li>
+            <li class="tab-item {{ menu_selected === 'Form' ? 'active' : '' }}">
+                <a href="#/form">
+                    <!--<img class="tab-icon" src="img/icon-home.png">-->
+                    <div class="tab-label">Cargar</div>
+                </a>
+            </li>
+            <li class="tab-item {{ menu_selected === 'List' ? 'active' : '' }}">
+                <a href="#/list">
+                    <!--<img class="tab-icon" src="img/icon-home.png">-->
+                    <div class="tab-label">Listar</div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div ng-view></div>
+    </div>
+
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+</body>
+</html>

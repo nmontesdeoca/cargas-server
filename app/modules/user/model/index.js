@@ -16,7 +16,6 @@ UserSchema = new Schema({
             { validator: validation.email, msg: 'email already exists' }
         ]
     },
-    username: { type: String, validate: [ validation.empty, 'username name cannot be blank' ] },
     provider: String,
     hashed_password: { type: String, validate: [ validation.empty, 'password name cannot be blank' ] },
     salt: String,
@@ -109,7 +108,7 @@ UserSchema.method({
         if (!password) {
             return '';
         }
-        
+
         try {
             encrypred = crypto.createHmac('sha1', this.salt).update(password).digest('hex');
             return encrypred;
