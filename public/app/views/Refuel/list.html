@@ -4,7 +4,7 @@
         <p>{{ refuel.kilometers }} kms</p>
         <p>{{ refuel.capacity }} lts</p>
         <p>{{ refuel.date | date:'dd-MM-yyyy'}}</p>
-        <a href="#/form/{{ $index }}" class="button edit">Editar</a>
+        <a href="#/refuel/{{ $index }}" class="button edit">Editar</a>
         <button class="button-negative" ng-click="delete($index)">Eliminar</button>
     </li>
 </ul>

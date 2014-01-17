@@ -7,6 +7,9 @@ angular.module('Controllers')
     function ($scope, $rootScope, $http, $location) {
         $scope.user = {};
 
+        $scope.$parent.menu_selected = 'Login';
+        $scope.$parent.title = 'Login';
+
         $scope.login = function () {
             $http.post('/login', {
                 email: $scope.user.email,

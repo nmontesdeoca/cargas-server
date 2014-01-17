@@ -1,0 +1,10 @@
+<ul class="segmented-controller">
+    <li ng-repeat="tab in tabs" class="{{ tab_selected === tab.text ? 'active' : '' }}">
+        <a ng-click="changeTab(tab)">{{ tab.text }}</a>
+    </li>
+</ul>
+<ul class="inset list">
+    <li id="item1" class="segmented-controller-item active">Item 1</li>
+    <li id="item2" class="segmented-controller-item">Item 2</li>
+    <li id="item3" class="segmented-controller-item">Item 3</li>
+</ul>

@@ -5,7 +5,8 @@ angular.module('Controllers')
     '$location',
     function ($scope, $routeParams, $location) {
 
-        $scope.$parent.menu_selected = 'Form';
+        $scope.$parent.menu_selected = 'Refuel';
+        $scope.$parent.title = 'Editar';
 
         $scope.refuel = $scope.refuels[$routeParams.index];
 

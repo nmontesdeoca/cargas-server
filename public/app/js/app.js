@@ -4,32 +4,29 @@ angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
     $httpProvider.responseInterceptors.push($utilProvider.interceptor);
 
     $routeProvider
-    .when('/', {
-        templateUrl: '/app/views/home.html',
-        controller: 'Home',
-        resolve: {
-            loggedin: $utilProvider.checkLoggedIn
-        }
-    })
     .when('/login', {
         templateUrl: '/app/views/User/login.html',
         controller: 'User.Login'
     })
-    .when('/form', {
+    .when('/account', {
+        templateUrl: '/app/views/User/account.html',
+        controller: 'User.Account'
+    })
+    .when('/refuel', {
         templateUrl: '/app/views/Refuel/form.html',
         controller: 'Refuel.Add',
         resolve: {
             loggedin: $utilProvider.checkLoggedIn
         }
     })
-    .when('/form/:index', {
+    .when('/refuel/:index', {
         templateUrl: '/app/views/Refuel/form.html',
         controller: 'Refuel.Edit',
         resolve: {
             loggedin: $utilProvider.checkLoggedIn
         }
     })
-    .when('/list', {
+    .when('/refuels', {
         templateUrl: '/app/views/Refuel/list.html',
         controller: 'Refuel.List',
         resolve: {
@@ -37,7 +34,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
         }
     })
     .otherwise({
-        redirectTo: '/'
+        redirectTo: '/refuels'
     });
 
 
