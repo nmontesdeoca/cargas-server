@@ -8,8 +8,9 @@
  */
 exports.requiresLogin = function (request, response, next) {
     if (!request.isAuthenticated()) {
-        request.session.returnTo = request.originalUrl;
-        return response.redirect('/login');
+        // request.session.returnTo = request.originalUrl;
+        // return response.redirect('/login');
+        return response.send(401);
     }
     next.apply(this);
 };

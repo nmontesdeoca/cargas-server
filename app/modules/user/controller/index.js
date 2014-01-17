@@ -32,7 +32,8 @@ module.exports = {
         response.render('login', { title: 'Entrar' });
     },
     login: function (request, response) {
-        module.exports.authCallback(request, response);
+        response.send(request.user);
+        // module.exports.authCallback(request, response);
     },
     signin: function (request, response) {},
     authCallback: function (request, response) {
@@ -45,5 +46,11 @@ module.exports = {
     },
     showAccountForm: function (request, response) {},
     saveAccount: function (request, response) {},
-    logout: function (request, response) {}
+    logout: function (request, response) {
+        request.logOut();
+        request.send(200);
+    },
+    loggedin: function (request, response) {
+        response.send(request.isAuthenticated() ? request.user : '0');
+    }
 };

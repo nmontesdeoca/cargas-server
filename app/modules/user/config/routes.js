@@ -27,7 +27,7 @@ module.exports = function (app) {
         callbackUrl: 'oob',
         failureRedirect: '/login'
     }), controller.authCallback);
-  
+
     app.get('/auth/google', passport.authenticate('google', {
         failureRedirect: '/login',
         scope: [
@@ -41,6 +41,8 @@ module.exports = function (app) {
 
     app.get('/account', authorization.requiresLogin, controller.showAccountForm);
     app.put('/account', authorization.requiresLogin, controller.saveAccount);
-    
+
     app.get('/logout', authorization.requiresLogin, controller.logout);
+
+    app.get('/loggedin', controller.loggedin);
 };

@@ -1,0 +1,32 @@
+<form ng-submit="login()" method="post">
+    <div class="input-group">
+        <div class="input-row">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="nico@cargas.com" ng-model="user.email">
+        </div>
+        <div class="input-row">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="secret" ng-model="user.password">
+        </div>
+        <button type="submit" class="button-block">Entrar</button>
+    </div>
+</form>
+<p>
+    <a href="/auth/twitter" data-ignore="push">
+        <img src="/images/sign-in-with-twitter.png" alt="sign in with twitter">
+    </a>
+</p>
+<p>
+    <a href="/auth/facebook" data-ignore="push">
+        <img src="/images/sign-in-with-facebook.png" alt="sign in with facebook">
+    </a>
+</p>
+<!--
+GOOGLE is not implemented
+<p>
+    <a href="/auth/google" data-ignore="push">
+        <img src="/images/sign-in-with-google.png" alt="sign in with google">
+    </a>
+</p>
+-->
+<p><a href="/signup">Registrarme</a></p>

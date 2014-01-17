@@ -1,25 +1,47 @@
-angular.module('CarGas', ['ngRoute', 'controllers'])
+angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
+.config(['$routeProvider', '$httpProvider', '$utilProvider', function ($routeProvider, $httpProvider, $utilProvider) {
 
-.config(['$routeProvider', function ($routeProvider) {
+    $httpProvider.responseInterceptors.push($utilProvider.interceptor);
+
     $routeProvider
-
     .when('/', {
-        templateUrl: 'partials/home.html',
-        controller: 'Home'
+        templateUrl: '/app/views/home.html',
+        controller: 'Home',
+        resolve: {
+            loggedin: $utilProvider.checkLoggedIn
+        }
+    })
+    .when('/login', {
+        templateUrl: '/app/views/User/login.html',
+        controller: 'User.Login'
     })
     .when('/form', {
-        templateUrl: 'partials/form.html',
-        controller: 'Add'
+        templateUrl: '/app/views/Refuel/form.html',
+        controller: 'Refuel.Add',
+        resolve: {
+            loggedin: $utilProvider.checkLoggedIn
+        }
     })
     .when('/form/:index', {
-        templateUrl: 'partials/form.html',
-        controller: 'Edit'
+        templateUrl: '/app/views/Refuel/form.html',
+        controller: 'Refuel.Edit',
+        resolve: {
+            loggedin: $utilProvider.checkLoggedIn
+        }
     })
     .when('/list', {
-        templateUrl: 'partials/list.html',
-        controller: 'List'
+        templateUrl: '/app/views/Refuel/list.html',
+        controller: 'Refuel.List',
+        resolve: {
+            loggedin: $utilProvider.checkLoggedIn
+        }
     })
     .otherwise({
         redirectTo: '/'
     });
+
+
 }]);
+
+angular.module('Controllers', []);
+angular.module('Providers', []);
