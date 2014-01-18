@@ -5,7 +5,7 @@ angular.module('Providers')
     this.checkLoggedIn = function ($q, $timeout, $http, $location, $rootScope) {
         var deferred = $q.defer();
 
-        $http.get('/loggedin').success(function (user) {
+        $http.get('/api/loggedin').success(function (user) {
             if (user !== '0') {
                 deferred.resolve();
             } else {

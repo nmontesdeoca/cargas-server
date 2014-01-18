@@ -11,7 +11,7 @@ angular.module('Controllers')
         $scope.$parent.title = 'Login';
 
         $scope.login = function () {
-            $http.post('/login', {
+            $http.post('/api/login', {
                 email: $scope.user.email,
                 password: $scope.user.password
             }).success(function (user) {

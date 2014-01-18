@@ -23,18 +23,17 @@ UserSchema = new Schema({
     facebook: {},
     twitter: {},
     google: {},
+    cars: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Car'}],
     created_at: { type: Date, default: Date.now },
     updated_at: Date,
 });
 
-if (!UserSchema.options.toObject) {
-    UserSchema.options.toObject = {};
-}
-
+/*
 UserSchema.options.toObject.transform = function (document, result, options) {
     delete result.salt;
     delete result.hashed_password;
 };
+*/
 
 /**
  * virtuals
@@ -47,25 +46,6 @@ UserSchema
         this.hashed_password = this.encryptPassword(password);
     })
     .get(function () { return this._password; });
-
-/**
- * static methods
- */
-UserSchema.static({
-    preSave: function (next) {
-        this.updated_at = new Date();
-
-        if (!this.isNew) {
-            return next.apply(this);
-        }
-
-        if (!this.password && !~authTypes.indexOf(this.provider)) {
-            next.apply(this, [new Error('invalid password')]);
-        } else {
-            next.apply(this);
-        }
-    }
-});
 
 /**
  * instance methods
@@ -121,5 +101,17 @@ UserSchema.method({
 /**
  * pre-save hook
  */
-UserSchema.pre('save', UserSchema.statics.preSave);
+UserSchema.pre('save', function (next) {
+    this.updated_at = new Date();
+
+    if (!this.isNew) {
+        return next.apply(this);
+    }
+
+    if (!this.password && !~authTypes.indexOf(this.provider)) {
+        next.apply(this, [new Error('invalid password')]);
+    } else {
+        next.apply(this);
+    }
+});
 mongoose.model('User', UserSchema);

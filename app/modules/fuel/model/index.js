@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
     FuelSchema;
 
 FuelSchema = new Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     cost: { type: Number },
     name: { type: String },
     created_at: { type: Date, default: Date.now },

@@ -1,51 +1,30 @@
 var User = require('mongoose').model('User');
 
 module.exports = {
-    showSignupform: function (request, response) {
-        response.render('signup', { title: 'Registrarme' });
-    },
     create: function (request, response) {
         var user = new User(request.body);
         user.provider = 'local';
         user.save(function (err) {
-            if (err) {
-                response.redirect('/signup');
-                /*return response.render('users/signup', {
-                    // errors: utils.errors(err.errors),
-                    user: user,
-                    title: 'Registrarme'
-                });*/
-            }
-
-            /**
-             * manually login the user once successfully signed up
-             */
             request.logIn(user, function (err) {
                 if (err) {
                     return next.apply(this, [err]);
                 }
-                return response.redirect('/refuels');
+                return response.json(user);
             });
         });
     },
-    showLoginForm: function (request, response) {
-        response.render('login', { title: 'Entrar' });
+    get: function (request, response) {
+        response.json(request.user);
+    },
+    update: function (request, response) {
+        request.user.set(request.body);
+        request.user.save(function (error, user) {
+            response.json(user);
+        });
     },
     login: function (request, response) {
-        response.send(request.user);
-        // module.exports.authCallback(request, response);
+        module.exports.get(request, response);
     },
-    signin: function (request, response) {},
-    authCallback: function (request, response) {
-        if (request.session.returnTo) {
-            response.redirect(request.session.returnTo);
-            delete request.session.returnTo;
-            return;
-        }
-        response.redirect('/');
-    },
-    showAccountForm: function (request, response) {},
-    saveAccount: function (request, response) {},
     logout: function (request, response) {
         request.logOut();
         request.send(200);

@@ -38,13 +38,13 @@ Idea de modelos
     twitter         Object
     google          Object
     cars            List (Car)
+    fuels           List (Fuel)
     created_at      Date
     updated_at      Date
 
     Car
     model       ObjectID
     year        Number
-    fuel        ObjectID
     created_at  Date
     updated_at  Date
 
@@ -60,5 +60,18 @@ Idea de modelos
     updated_at  Date
 
     Fuel
-    name    String
-    cost    Number
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    cost: { type: Number },
+    name: { type: String },
+    created_at: { type: Date, default: Date.now },
+    updated_at: { type: Date }
+
+    Refuel
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    fuel: { type: mongoose.Schema.Types.ObjectId, ref: 'Fuel'},
+    cost: { type: Number },
+    capacity: { type: Number },
+    average: { type: Number },
+    kilometers: { type: Number },
+    created_at: { type: Date, default: Date.now },
+    updated_at: Date

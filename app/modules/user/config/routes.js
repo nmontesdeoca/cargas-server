@@ -3,46 +3,26 @@ var controller = require('../controller'),
     authorization = require('../../../middlewares/authorization');
 
 module.exports = function (app) {
-    app.get('/signup', controller.showSignupform);
-    app.post('/signup', controller.create);
+    app.post('/api/user', controller.create);
+    app.get('/api/user', controller.get);
+    app.post('/api/user/:id', controller.update);
+    app.post('/api/login', passport.authenticate('local'), controller.login);
+    app.get('/api/logout', authorization.requiresLogin, controller.logout);
+    app.get('/api/loggedin', controller.loggedin);
 
-    app.get('/login', controller.showLoginForm);
-    app.post('/login', passport.authenticate('local', {
-        failureRedirect: '/login'
+    app.get('/api/auth/facebook', passport.authenticate('facebook', {
+        scope: ['email', 'user_about_me']
     }), controller.login);
+    app.get('/api/auth/facebook/callback', passport.authenticate('facebook'), controller.login);
 
-    app.get('/auth/facebook', passport.authenticate('facebook', {
-        scope: ['email', 'user_about_me'],
-        failureRedirect: '/login'
-    }), controller.signin);
-    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        failureRedirect: '/login'
-    }), controller.authCallback);
+    app.get('/api/auth/twitter', passport.authenticate('twitter'), controller.login);
+    app.get('/api/auth/twitter/callback', passport.authenticate('twitter'), controller.login);
 
-    app.get('/auth/twitter', passport.authenticate('twitter', {
-        failureRedirect: '/login'
-    }), controller.signin);
-
-    app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-        callbackUrl: 'oob',
-        failureRedirect: '/login'
-    }), controller.authCallback);
-
-    app.get('/auth/google', passport.authenticate('google', {
-        failureRedirect: '/login',
+    app.get('/api/auth/google', passport.authenticate('google', {
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
             'https://www.googleapis.com/auth/userinfo.email'
         ]
-    }), controller.signin);
-    app.get('/auth/google/callback', passport.authenticate('google', {
-        failureRedirect: '/login'
-    }), controller.authCallback);
-
-    app.get('/account', authorization.requiresLogin, controller.showAccountForm);
-    app.put('/account', authorization.requiresLogin, controller.saveAccount);
-
-    app.get('/logout', authorization.requiresLogin, controller.logout);
-
-    app.get('/loggedin', controller.loggedin);
+    }), controller.login);
+    app.get('/api/auth/google/callback', passport.authenticate('google'), controller.login);
 };
