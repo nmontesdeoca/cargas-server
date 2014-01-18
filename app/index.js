@@ -36,8 +36,3 @@ if (process.env.CONFIGURED) {
     config = require('../config/config')(config);
 }
 require('../config/passport')(require('passport'), config);
-
-/**
- * bootstrap ejs filters
- */
-utils.requirePath(__dirname + '/views/filters');
