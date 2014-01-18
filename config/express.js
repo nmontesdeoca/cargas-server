@@ -4,11 +4,8 @@ var mongoose = require('mongoose'),
 module.exports = function (app, express) {
     app.configure(function () {
         app.set('port', process.env.PORT || 3000);
-        app.set('views', __dirname + '/../app/views');
-        app.set('view engine', 'ejs');
         app.set('db', process.env.DB || require('./database').db);
         app.set('domain', process.env.DOMAIN || ('http://localhost:' + app.get('port')));
-        app.use(express.favicon());
         app.use(express.logger('dev'));
         app.use(express.bodyParser());
         app.use(express.methodOverride());
