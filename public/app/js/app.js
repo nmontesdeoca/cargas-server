@@ -15,6 +15,10 @@ angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
             templateUrl: '/app/views/User/login.html',
             controller: 'User.Login'
         })
+        .when('/register', {
+            templateUrl: '/app/views/User/register.html',
+            controller: 'User.Register'
+        })
         .when('/account', {
             templateUrl: '/app/views/User/account.html',
             controller: 'User.Account',
