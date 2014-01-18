@@ -18,7 +18,7 @@ angular.module('Providers')
         return deferred;
     };
 
-    this.interceptor = function ($q, $location) {
+    this.interceptor = ['$q', '$location', function ($q, $location) {
         return function (promise) {
             return promise.then(
                 function (response) {
@@ -32,5 +32,5 @@ angular.module('Providers')
                 }
             );
         };
-    };
+    }];
 });
