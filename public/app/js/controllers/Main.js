@@ -5,22 +5,22 @@ angular.module('Controllers')
     $scope.tabs = [
         {
             menu: 'Account',
-            href: '#/account',
+            href: '/account',
             text: 'Mi Cuenta'
         },
         {
             menu: 'Refuel',
-            href: '#/refuel',
+            href: '/refuel',
             text: 'Cargar'
         },
         {
             menu: 'Refuels',
-            href: '#/refuels',
+            href: '/refuels',
             text: 'Listar'
         },
         {
             menu: 'Logout',
-            href: '#/logout',
+            href: '/logout',
             text: 'Salir'
         }
     ];

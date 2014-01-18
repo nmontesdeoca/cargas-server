@@ -36,3 +36,12 @@ if (process.env.CONFIGURED) {
     config = require('../config/config')(config);
 }
 require('../config/passport')(require('passport'), config);
+
+/**
+ * in order to get the one page application working well,
+ * we need to redirect all the pages not found
+ * to the homepage to give the angular js app the ability to route these urls
+ */
+app.use(function (request, response, next) {
+    response.sendfile(__dirname + '/views/index.html');
+});
