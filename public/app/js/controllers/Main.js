@@ -1,8 +1,8 @@
 angular.module('Controllers')
-.controller('Main', ['$scope', function ($scope) {
-    $scope.menu_selected = 'Home';
+.controller('Main', ['$rootScope', function ($rootScope) {
+    $rootScope.menu_selected = 'Home';
 
-    $scope.tabs = [
+    $rootScope.tabs = [
         {
             menu: 'Account',
             href: '/account',

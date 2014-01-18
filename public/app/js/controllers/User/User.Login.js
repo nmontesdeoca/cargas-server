@@ -6,7 +6,7 @@ angular.module('Controllers')
     function ($scope, $http, $location) {
         $scope.user = {};
 
-        $scope.$parent.menu_selected = 'Login';
+        $scope.$parent.menu_selected = '';
         $scope.$parent.title = 'Login';
 
         $scope.login = function () {
@@ -15,7 +15,7 @@ angular.module('Controllers')
                 password: $scope.user.password
             }).then(
                 function (user) {
-                    $location.url('/admin');
+                    $location.url('/');
                 },
                 function () {
                     $location.url('/login');
