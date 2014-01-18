@@ -10,7 +10,17 @@ angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
     })
     .when('/account', {
         templateUrl: '/app/views/User/account.html',
-        controller: 'User.Account'
+        controller: 'User.Account',
+        resolve: {
+            loggedin: $utilProvider.checkLoggedIn
+        }
+    })
+    .when('/logout', {
+        template: '',
+        controller: 'User.Logout',
+        resolve: {
+            loggedin: $utilProvider.checkLoggedIn
+        }
     })
     .when('/refuel', {
         templateUrl: '/app/views/Refuel/form.html',
@@ -19,7 +29,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
             loggedin: $utilProvider.checkLoggedIn
         }
     })
-    .when('/refuel/:index', {
+    .when('/refuel/:id', {
         templateUrl: '/app/views/Refuel/form.html',
         controller: 'Refuel.Edit',
         resolve: {
@@ -36,9 +46,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
     .otherwise({
         redirectTo: '/refuels'
     });
-
-
 }]);
 
-angular.module('Controllers', []);
+angular.module('Controllers', ['ngResource']);
 angular.module('Providers', []);

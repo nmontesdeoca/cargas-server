@@ -27,6 +27,7 @@ angular.module('Providers')
                 function (response) {
                     if (response.status === 401) {
                         $location.url('/login');
+                        console.log('yee');
                         return $q.reject(response);
                     }
                 }

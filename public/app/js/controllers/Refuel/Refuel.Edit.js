@@ -3,16 +3,18 @@ angular.module('Controllers')
     '$scope',
     '$routeParams',
     '$location',
-    function ($scope, $routeParams, $location) {
+    'Refuel',
+    function ($scope, $routeParams, $location, Refuel) {
 
         $scope.$parent.menu_selected = 'Refuel';
         $scope.$parent.title = 'Editar';
 
-        $scope.refuel = $scope.refuels[$routeParams.index];
+        $scope.refuel = Refuel.get({ id: $routeParams.id });
 
-        $scope.update = function (refuel) {
-            $scope.refuels[$routeParams.index] = $scope.refuel;
-            $location.path('/list');
+        $scope.update = function () {
+            $scope.refuel.$save(function () {
+                $location.path('/');
+            });
         };
     }
 ]);

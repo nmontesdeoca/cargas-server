@@ -27,7 +27,7 @@ module.exports = {
     },
     logout: function (request, response) {
         request.logOut();
-        request.send(200);
+        response.send(200);
     },
     loggedin: function (request, response) {
         response.send(request.isAuthenticated() ? request.user : '0');
