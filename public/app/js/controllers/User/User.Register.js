@@ -3,36 +3,32 @@ angular.module('Controllers')
     '$scope',
     '$http',
     '$location',
-    function ($scope, $http, $location) {
+    'User',
+    function ($scope, $http, $location, User) {
         $scope.user = {};
 
         $scope.$parent.menu_selected = '';
         $scope.$parent.title = 'Registro';
 
         $scope.register = function () {
-            $http.post('/api/user', {
+            new User({
                 first_name: $scope.user.first_name,
                 last_name: $scope.user.last_name,
                 email: $scope.user.email,
                 password: $scope.user.password
-            }).then(
-                function (user) {
-                    $http.post('/api/login', {
-                        email: $scope.user.email,
-                        password: $scope.user.password
-                    }).then(
-                        function (user) {
-                            $location.url('/');
-                        },
-                        function () {
-                            $location.url('/login');
-                        }
-                    );
-                },
-                function () {
-                    $location.url('/login');
-                }
-            );
+            }).$save(function () {
+                $http.post('/api/login', {
+                    email: $scope.user.email,
+                    password: $scope.user.password
+                }).then(
+                    function (user) {
+                        $location.url('/');
+                    },
+                    function () {
+                        $location.url('/login');
+                    }
+                );
+            });
         };
     }
 ]);
