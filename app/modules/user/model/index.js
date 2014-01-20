@@ -23,7 +23,6 @@ UserSchema = new Schema({
     facebook: {},
     twitter: {},
     google: {},
-    cars: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Car'}],
     created_at: { type: Date, default: Date.now },
     updated_at: Date,
 });

@@ -4,8 +4,8 @@ var controller = require('../controller'),
 
 module.exports = function (app) {
     app.post('/api/user', controller.create);
-    app.get('/api/user', controller.get);
-    app.post('/api/user/:id', controller.update);
+    app.get('/api/user', authorization.requiresLogin, controller.get);
+    app.post('/api/user/:id', authorization.requiresLogin, controller.update);
     app.post('/api/login', passport.authenticate('local'), controller.login);
     app.get('/api/logout', authorization.requiresLogin, controller.logout);
     app.get('/api/loggedin', controller.loggedin);

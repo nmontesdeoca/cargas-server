@@ -12,7 +12,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
 
                     $http.get('/api/loggedin').success(function (user) {
                         if (user !== '0') {
-                            deferred.resolve();
+                            deferred.resolve(user);
                         } else {
                             $rootScope.message = 'You need to log in.';
                             deferred.reject();
@@ -58,35 +58,35 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
             templateUrl: '/app/views/User/account.html',
             controller: 'User.Account',
             resolve: {
-                isLoggedIn: utils.checkLoggedIn
+                user: utils.checkLoggedIn
             }
         })
         .when('/logout', {
             template: '',
             controller: 'User.Logout',
             resolve: {
-                isLoggedIn: utils.checkLoggedIn
+                user: utils.checkLoggedIn
             }
         })
         .when('/refuel', {
             templateUrl: '/app/views/Refuel/form.html',
             controller: 'Refuel.Add',
             resolve: {
-                isLoggedIn: utils.checkLoggedIn
+                user: utils.checkLoggedIn
             }
         })
         .when('/refuel/:id', {
             templateUrl: '/app/views/Refuel/form.html',
             controller: 'Refuel.Edit',
             resolve: {
-                isLoggedIn: utils.checkLoggedIn
+                user: utils.checkLoggedIn
             }
         })
         .when('/refuels', {
             templateUrl: '/app/views/Refuel/list.html',
             controller: 'Refuel.List',
             resolve: {
-                isLoggedIn: utils.checkLoggedIn
+                user: utils.checkLoggedIn
             }
         })
         .otherwise({
