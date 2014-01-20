@@ -1,14 +1,49 @@
-angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
+angular.module('CarGas', ['ngRoute', 'Controllers'])
 .config([
     '$routeProvider',
     '$httpProvider',
     '$locationProvider',
-    '$utilProvider',
-    function ($routeProvider, $httpProvider, $locationProvider, $utilProvider) {
+    function ($routeProvider, $httpProvider, $locationProvider) {
+
+        var utils = {
+            checkLoggedIn: ['$q', '$timeout', '$http', '$location', '$rootScope',
+                function ($q, $timeout, $http, $location, $rootScope) {
+                    var deferred = $q.defer();
+
+                    $http.get('/api/loggedin').success(function (user) {
+                        if (user !== '0') {
+                            deferred.resolve();
+                        } else {
+                            $rootScope.message = 'You need to log in.';
+                            deferred.reject();
+                            $location.url('/login');
+                        }
+                    });
+
+                    return deferred;
+                }
+            ],
+
+            interceptor: ['$q', '$location', function ($q, $location) {
+                return function (promise) {
+                    return promise.then(
+                        function (response) {
+                            return response;
+                        },
+                        function (response) {
+                            if (response.status === 401) {
+                                $location.url('/login');
+                                return $q.reject(response);
+                            }
+                        }
+                    );
+                };
+            }]
+        };
 
         $locationProvider.html5Mode(true);
 
-        $httpProvider.responseInterceptors.push($utilProvider.interceptor);
+        $httpProvider.responseInterceptors.push(utils.interceptor);
 
         $routeProvider
         .when('/login', {
@@ -23,35 +58,35 @@ angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
             templateUrl: '/app/views/User/account.html',
             controller: 'User.Account',
             resolve: {
-                loggedin: $utilProvider.checkLoggedIn
+                isLoggedIn: utils.checkLoggedIn
             }
         })
         .when('/logout', {
             template: '',
             controller: 'User.Logout',
             resolve: {
-                loggedin: $utilProvider.checkLoggedIn
+                isLoggedIn: utils.checkLoggedIn
             }
         })
         .when('/refuel', {
             templateUrl: '/app/views/Refuel/form.html',
             controller: 'Refuel.Add',
             resolve: {
-                loggedin: $utilProvider.checkLoggedIn
+                isLoggedIn: utils.checkLoggedIn
             }
         })
         .when('/refuel/:id', {
             templateUrl: '/app/views/Refuel/form.html',
             controller: 'Refuel.Edit',
             resolve: {
-                loggedin: $utilProvider.checkLoggedIn
+                isLoggedIn: utils.checkLoggedIn
             }
         })
         .when('/refuels', {
             templateUrl: '/app/views/Refuel/list.html',
             controller: 'Refuel.List',
             resolve: {
-                loggedin: $utilProvider.checkLoggedIn
+                isLoggedIn: utils.checkLoggedIn
             }
         })
         .otherwise({
@@ -61,4 +96,3 @@ angular.module('CarGas', ['ngRoute', 'Controllers', 'Providers'])
 ]);
 
 angular.module('Controllers', ['ngResource']);
-angular.module('Providers', []);
