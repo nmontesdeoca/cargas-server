@@ -1,10 +1,17 @@
-<ul class="segmented-controller">
-    <li ng-repeat="tab in tabs" class="{{ tab_selected === tab.text ? 'active' : '' }}">
-        <a ng-click="changeTab(tab)">{{ tab.text }}</a>
-    </li>
-</ul>
-<ul class="list inset">
-    <li id="item1" class="segmented-controller-item active">Item 1</li>
-    <li id="item2" class="segmented-controller-item">Item 2</li>
-    <li id="item3" class="segmented-controller-item">Item 3</li>
-</ul>
+<form ng-submit="update()" method="post">
+    <div class="input-group">
+        <div class="input-row">
+            <label>Nombre</label>
+            <input type="text" name="first_name" placeholder="Nicolas" ng-model="user.first_name">
+        </div>
+        <div class="input-row">
+            <label>Apellido</label>
+            <input type="text" name="last_name" placeholder="Montesdeoca" ng-model="user.last_name">
+        </div>
+        <div class="input-row">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="nico@cargas.com" ng-model="user.email">
+        </div>
+    </div>
+    <button type="submit" class="button-block">Actualizar</button>
+</form>

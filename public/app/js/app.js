@@ -6,13 +6,13 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
     function ($routeProvider, $httpProvider, $locationProvider) {
 
         var utils = {
-            checkLoggedIn: ['$q', '$timeout', '$http', '$location', '$rootScope',
-                function ($q, $timeout, $http, $location, $rootScope) {
+            checkLoggedIn: ['$q', '$timeout', '$http', '$location', '$rootScope', 'User',
+                function ($q, $timeout, $http, $location, $rootScope, User) {
                     var deferred = $q.defer();
 
                     $http.get('/api/loggedin').success(function (user) {
                         if (user !== '0') {
-                            deferred.resolve(user);
+                            deferred.resolve(new User(user));
                         } else {
                             $rootScope.message = 'You need to log in.';
                             deferred.reject();
@@ -20,7 +20,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                         }
                     });
 
-                    return deferred;
+                    return deferred.promise;
                 }
             ],
 

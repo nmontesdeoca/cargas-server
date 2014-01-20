@@ -1,23 +1,19 @@
 angular.module('Controllers')
 .controller('User.Account', [
     '$scope',
-    function ($scope) {
+    '$location',
+    'user',
+    function ($scope, $location, user) {
 
         $scope.$parent.menu_selected = 'Account';
         $scope.$parent.title = 'Mi Cuenta';
 
-        $scope.tab_selected = 'algo';
+        $scope.user = user;
 
-        $scope.tabs = [
-            {
-                text: 'algo',
-                action: 'action'
-            }
-        ];
-
-        $scope.changeTab = function (tab) {
-            console.log(tab);
+        $scope.update = function () {
+            $scope.user.$save(function () {
+                $location.path('/');
+            });
         };
-
     }
 ]);
