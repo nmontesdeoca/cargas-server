@@ -37,27 +37,8 @@ Idea de modelos
     facebook        Object
     twitter         Object
     google          Object
-    cars            List (Car)
-    fuels           List (Fuel)
     created_at      Date
     updated_at      Date
-
-    Car
-    model       ObjectID
-    year        Number
-    created_at  Date
-    updated_at  Date
-
-    Make
-    name        String
-    created_at  Date
-    updated_at  Date
-
-    Model
-    name        String
-    make        ObjectID
-    created_at  Date
-    updated_at  Date
 
     Fuel
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
