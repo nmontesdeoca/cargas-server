@@ -4,10 +4,13 @@ angular.module('Controllers')
     '$routeParams',
     '$location',
     'Refuel',
-    function ($scope, $routeParams, $location, Refuel) {
+    'fuels',
+    function ($scope, $routeParams, $location, Refuel, fuels) {
 
         $scope.$parent.menu_selected = 'Refuel';
         $scope.$parent.title = 'Editar';
+
+        $scope.fuels = fuels;
 
         $scope.refuel = Refuel.get({ id: $routeParams.id });
 

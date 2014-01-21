@@ -6,8 +6,12 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
     function ($routeProvider, $httpProvider, $locationProvider) {
 
         var utils = {
-            checkLoggedIn: ['$q', '$timeout', '$http', '$location', '$rootScope', 'User',
-                function ($q, $timeout, $http, $location, $rootScope, User) {
+            fuels: ['Fuel', function (Fuel) {
+                return Fuel.query();
+            }],
+
+            checkLoggedIn: ['$q', '$http', '$location', '$rootScope', 'User',
+                function ($q, $http, $location, $rootScope, User) {
                     var deferred = $q.defer();
 
                     $http.get('/api/loggedin').success(function (user) {
@@ -72,6 +76,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
             templateUrl: '/app/views/Refuel/form.html',
             controller: 'Refuel.Add',
             resolve: {
+                fuels: utils.fuels,
                 user: utils.checkLoggedIn
             }
         })
@@ -79,6 +84,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
             templateUrl: '/app/views/Refuel/form.html',
             controller: 'Refuel.Edit',
             resolve: {
+                fuels: utils.fuels,
                 user: utils.checkLoggedIn
             }
         })
