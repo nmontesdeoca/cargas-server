@@ -10,6 +10,10 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                 return Fuel.query();
             }],
 
+            refuels: ['Refuel', function (Refuel) {
+                return Refuel.query();
+            }],
+
             checkLoggedIn: ['$q', '$http', '$location', '$rootScope', 'User',
                 function ($q, $http, $location, $rootScope, User) {
                     var deferred = $q.defer();
@@ -92,7 +96,8 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
             templateUrl: '/app/views/Refuel/list.html',
             controller: 'Refuel.List',
             resolve: {
-                user: utils.checkLoggedIn
+                user: utils.checkLoggedIn,
+                refuels: utils.refuels
             }
         })
         .otherwise({
