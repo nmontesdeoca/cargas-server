@@ -1,1 +1,0 @@
-exports.db = 'mongodb://user:password@localhost:port/car_gas';

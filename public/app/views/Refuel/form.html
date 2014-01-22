@@ -1,4 +1,9 @@
 <form class="form">
+    <div>
+        <select name="fuel" id="fuel" ng-model="fuel" ng-options="fuel.name for fuel in fuels" required>
+            <option value="">-- Seleccionar Combustible --</option>
+        </select>
+    </div>
     <div class="input-group">
         <div class="input-row">
             <label>Costo $</label>

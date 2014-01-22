@@ -3,8 +3,10 @@ angular.module('Controllers')
     '$scope',
     '$http',
     '$location',
-    function ($scope, $http, $location) {
+    '$rootScope',
+    function ($scope, $http, $location, $rootScope) {
         $scope.user = {};
+        $rootScope.error = null;
 
         $scope.$parent.menu_selected = '';
         $scope.$parent.title = 'Login';
@@ -14,8 +16,17 @@ angular.module('Controllers')
                 email: $scope.user.email,
                 password: $scope.user.password
             }).then(
-                function (user) {
-                    $location.url('/');
+                function (response) {
+                    if (response && response.data) {
+                        if (response.data.user) {
+                            $location.url('/');
+                        } else if (response.data.errorMessage) {
+                            $rootScope.error = response.data.errorMessage;
+                        }
+                    }
+                    else {
+                        $rootScope.error = 'Pasó algo!';
+                    }
                 },
                 function () {
                     $location.url('/login');

@@ -19,7 +19,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                             deferred.resolve(new User(user));
                         } else {
                             $rootScope.message = 'You need to log in.';
-                            deferred.reject();
+                            //deferred.reject();
                             $location.url('/login');
                         }
                     });
