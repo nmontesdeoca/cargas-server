@@ -37,7 +37,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                         function (response) {
                             if (response.status === 401) {
                                 $location.url('/login');
-                                return $q.reject(response);
+                                // return $q.reject(response);
                             }
                         }
                     );
