@@ -7,7 +7,7 @@ angular.module('Controllers')
     function ($scope, $http, $location, User) {
         $scope.user = {};
 
-        $scope.$parent.menu_selected = '';
+        $scope.$parent.menu_selected = 'Register';
         $scope.$parent.title = 'Registro';
 
         $scope.register = function () {
