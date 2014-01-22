@@ -6,7 +6,7 @@ angular.module('Controllers')
     'refuels',
     function ($scope, $location, Refuel, refuels) {
 
-        $scope.$parent.menu_selected = 'Refuels';
+        $scope.$parent.menuSelected = 'Refuels';
         $scope.$parent.title = 'Lista';
 
         $scope.refuels = refuels;

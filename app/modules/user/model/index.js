@@ -6,8 +6,8 @@ var mongoose = require('mongoose'),
     UserSchema;
 
 UserSchema = new Schema({
-    first_name: { type: String, validate: [ validation.empty, 'first name cannot be blank' ] },
-    last_name: { type: String, validate: [ validation.empty, 'last name cannot be blank' ] },
+    firstName: { type: String, validate: [ validation.empty, 'first name cannot be blank' ] },
+    lastName: { type: String, validate: [ validation.empty, 'last name cannot be blank' ] },
     email: {
         type: String,
         lowercase: true,
@@ -17,20 +17,20 @@ UserSchema = new Schema({
         ]
     },
     provider: String,
-    hashed_password: { type: String, validate: [ validation.empty, 'password name cannot be blank' ] },
+    hashedPassword: { type: String, validate: [ validation.empty, 'password name cannot be blank' ] },
     salt: String,
     authToken: String,
     facebook: {},
     twitter: {},
     google: {},
-    created_at: { type: Date, default: Date.now },
-    updated_at: Date,
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: Date,
 });
 
 /*
 UserSchema.options.toObject.transform = function (document, result, options) {
     delete result.salt;
-    delete result.hashed_password;
+    delete result.hashedPassword;
 };
 */
 
@@ -42,7 +42,7 @@ UserSchema
     .set(function (password) {
         this._password = password;
         this.salt = this.makeSalt();
-        this.hashed_password = this.encryptPassword(password);
+        this.hashedPassword = this.encryptPassword(password);
     })
     .get(function () { return this._password; });
 
@@ -59,7 +59,7 @@ UserSchema.method({
      * @api public
      */
     authenticate: function (plainText) {
-        return this.encryptPassword(plainText) === this.hashed_password;
+        return this.encryptPassword(plainText) === this.hashedPassword;
     },
 
     /**
@@ -101,7 +101,7 @@ UserSchema.method({
  * pre-save hook
  */
 UserSchema.pre('save', function (next) {
-    this.updated_at = new Date();
+    this.updatedAt = new Date();
 
     if (!this.isNew) {
         return next.apply(this);

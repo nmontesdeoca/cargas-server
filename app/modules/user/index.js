@@ -1,5 +1,5 @@
-var application_factory = require('../../../lib/application/factory'),
-    app = module.exports = application_factory.newApplication({
+var applicationFactory = require('../../../lib/application/factory'),
+    app = module.exports = applicationFactory.newApplication({
         name: 'user',
         bodyParser: true,
         methodOverride: true,

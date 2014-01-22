@@ -7,13 +7,13 @@ angular.module('Controllers')
     function ($scope, $http, $location, User) {
         $scope.user = {};
 
-        $scope.$parent.menu_selected = 'Register';
+        $scope.$parent.menuSelected = 'Register';
         $scope.$parent.title = 'Registro';
 
         $scope.register = function () {
             new User({
-                first_name: $scope.user.first_name,
-                last_name: $scope.user.last_name,
+                firstName: $scope.user.firstName,
+                lastName: $scope.user.lastName,
                 email: $scope.user.email,
                 password: $scope.user.password
             }).$save(function () {

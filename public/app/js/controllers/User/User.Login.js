@@ -8,7 +8,7 @@ angular.module('Controllers')
         $scope.user = {};
         $rootScope.error = null;
 
-        $scope.$parent.menu_selected = 'Login';
+        $scope.$parent.menuSelected = 'Login';
         $scope.$parent.title = 'Ingreso';
 
         $scope.login = function () {

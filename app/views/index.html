@@ -28,11 +28,11 @@
 
     <nav
         class="bar-tab"
-        ng-show="menu_selected !== 'Login' && menu_selected !== 'Register' && menu_selected !== 'Home'">
+        ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'">
 
         <ul class="tab-inner">
             <li ng-repeat="tab in tabs"
-                class="tab-item{{ menu_selected === tab.menu ? ' active' : '' }}">
+                class="tab-item{{ menuSelected === tab.menu ? ' active' : '' }}">
 
                 <a href="{{ tab.href }}">
                     <!--<img class="tab-icon" src="img/icon-home.png">-->
@@ -42,7 +42,7 @@
         </ul>
     </nav>
 
-    <div ng-view class="content {{ menu_selected !== 'Refuels' ? 'content-padded' : '' }}"></div>
+    <div ng-view class="content {{ menuSelected !== 'Refuels' ? 'content-padded' : '' }}"></div>
 
     <script src="/app/js/vendor/angular/angular.js"></script>
     <script src="/app/js/vendor/angular/angular-route.js"></script>
