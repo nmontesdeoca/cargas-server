@@ -21,8 +21,11 @@ UserSchema = new Schema({
     salt: String,
     authToken: String,
     facebook: {},
+    facebookId: String,
     twitter: {},
+    twitterId: String,
     google: {},
+    googleId: String,
     createdAt: { type: Date, default: Date.now },
     updatedAt: Date,
 });

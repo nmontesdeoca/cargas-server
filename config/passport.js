@@ -51,7 +51,7 @@ module.exports = function (passport, config) {
             callbackURL: config.twitter.callbackURL
         },
         function (token, tokenSecret, profile, done) {
-            User.findOne({ 'twitter.id': profile.id }, function (err, user) {
+            User.findOne({ twitterId: profile.id }, function (err, user) {
                 if (err) {
                     return done(err);
                 }
@@ -59,7 +59,8 @@ module.exports = function (passport, config) {
                     user = new User({
                         name: profile.displayName,
                         provider: 'twitter',
-                        twitter: profile._json
+                        twitter: profile._json,
+                        twitterId: profile._json.id
                     });
                     user.save(function (err) {
                         if (err) {
@@ -83,7 +84,7 @@ module.exports = function (passport, config) {
             callbackURL: config.facebook.callbackURL
         },
         function (accessToken, refreshToken, profile, done) {
-            User.findOne({ 'facebook.id': profile.id }, function (err, user) {
+            User.findOne({ facebookId: profile.id }, function (err, user) {
                 if (err) {
                     return done(err);
                 }
@@ -92,7 +93,8 @@ module.exports = function (passport, config) {
                         name: profile.displayName,
                         email: profile.emails[0].value,
                         provider: 'facebook',
-                        facebook: profile._json
+                        facebook: profile._json,
+                        facebookId: profile._json.id
                     });
                     user.save(function (err) {
                         if (err) {
@@ -116,13 +118,14 @@ module.exports = function (passport, config) {
             callbackURL: config.google.callbackURL
         },
         function (accessToken, refreshToken, profile, done) {
-            User.findOne({ 'google.id': profile.id }, function (err, user) {
+            User.findOne({ googleId: profile.id }, function (err, user) {
                 if (!user) {
                     user = new User({
                         name: profile.displayName,
                         email: profile.emails[0].value,
                         provider: 'google',
-                        google: profile._json
+                        google: profile._json,
+                        googleId: profile._json.id
                     });
                     user.save(function (err) {
                         if (err) {

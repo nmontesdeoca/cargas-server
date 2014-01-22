@@ -12,17 +12,17 @@ module.exports = function (app) {
 
     app.get('/api/auth/facebook', passport.authenticate('facebook', {
         scope: ['email', 'user_about_me']
-    }), controller.get);
-    app.get('/api/auth/facebook/callback', passport.authenticate('facebook'), controller.get);
+    }));
+    app.get('/api/auth/facebook/callback', passport.authenticate('facebook'));
 
-    app.get('/api/auth/twitter', passport.authenticate('twitter'), controller.get);
-    app.get('/api/auth/twitter/callback', passport.authenticate('twitter'), controller.get);
+    app.get('/api/auth/twitter', passport.authenticate('twitter'));
+    app.get('/api/auth/twitter/callback', passport.authenticate('twitter'));
 
     app.get('/api/auth/google', passport.authenticate('google', {
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
             'https://www.googleapis.com/auth/userinfo.email'
         ]
-    }), controller.get);
-    app.get('/api/auth/google/callback', passport.authenticate('google'), controller.get);
+    }));
+    app.get('/api/auth/google/callback', passport.authenticate('google'));
 };

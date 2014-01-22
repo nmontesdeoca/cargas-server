@@ -23,7 +23,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                             deferred.resolve(new User(user));
                         } else {
                             $rootScope.message = 'You need to log in.';
-                            // deferred.reject();
+                            deferred.reject();
                             $location.url('/login');
                         }
                     });
@@ -41,7 +41,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                         function (response) {
                             if (response.status === 401) {
                                 $location.url('/login');
-                                // return $q.reject(response);
+                                return $q.reject(response);
                             }
                         }
                     );

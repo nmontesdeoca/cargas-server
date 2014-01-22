@@ -19,9 +19,9 @@ utils.requireModules(__dirname + '/modules', app);
  */
 domain = app.get('domain');
 config = {
-    facebook: { callbackURL: domain + '/auth/facebook/callback' },
-    twitter: { callbackURL: domain + '/auth/twitter/callback' },
-    google: { callbackURL: domain + '/auth/google/callback' }
+    facebook: { callbackURL: domain + '/api/auth/facebook/callback' },
+    twitter: { callbackURL: domain + '/api/auth/twitter/callback' },
+    google: { callbackURL: domain + '/api/auth/google/callback' }
 };
 if (process.env.CONFIGURED) {
     config.facebook.clientID = process.env.FACEBOOK_CLIENT_ID;
