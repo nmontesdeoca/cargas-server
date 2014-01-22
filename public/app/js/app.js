@@ -10,6 +10,10 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                 return Fuel.query();
             }],
 
+            refuel: ['$route', 'Refuel', function ($route, Refuel) {
+                return Refuel.get({ id: $route.current.params.id });
+            }],
+
             refuels: ['Refuel', function (Refuel) {
                 return Refuel.query();
             }],
@@ -89,7 +93,8 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
             controller: 'Refuel.Edit',
             resolve: {
                 fuels: utils.fuels,
-                user: utils.checkLoggedIn
+                user: utils.checkLoggedIn,
+                refuel: utils.refuel
             }
         })
         .when('/refuels', {
