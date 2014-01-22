@@ -26,7 +26,10 @@
         <h1 class="title">{{ title || 'Title' }}</h1>
     </header>
 
-    <nav class="bar-tab" ng-show="menu_selected !== 'Login' && menu_selected !== 'Register'">
+    <nav
+        class="bar-tab"
+        ng-show="menu_selected !== 'Login' && menu_selected !== 'Register' && menu_selected !== 'Home'">
+
         <ul class="tab-inner">
             <li ng-repeat="tab in tabs"
                 class="tab-item{{ menu_selected === tab.menu ? ' active' : '' }}">
