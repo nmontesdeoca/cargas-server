@@ -6,6 +6,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
     function ($routeProvider, $httpProvider, $locationProvider) {
 
         var utils = {
+
             fuels: ['Fuel', function (Fuel) {
                 return Fuel.query();
             }],
@@ -70,7 +71,16 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
             templateUrl: '/app/views/User/account.html',
             controller: 'User.Account',
             resolve: {
-                user: utils.checkLoggedIn
+                user: utils.checkLoggedIn,
+                fuels: utils.fuels
+            }
+        })
+        .when('/account/fuels', {
+            templateUrl: '/app/views/User/account.fuels.html',
+            controller: 'User.Account.Fuels',
+            resolve: {
+                user: utils.checkLoggedIn,
+                fuels: utils.fuels
             }
         })
         .when('/logout', {

@@ -15,5 +15,10 @@ module.exports = {
         Fuel.findOne({ _id: request.params.id }, function (error, fuel) {
             response.json(fuel);
         });
+    },
+    delete: function (request, response) {
+        Fuel.findByIdAndRemove(request.params.id, function (error, fuel) {
+            response.json(fuel);
+        });
     }
 };
