@@ -1293,3 +1293,7 @@ button.button-block {
 .list .edit {
   right: 105px;
 }
+
+[disabled] {
+  opacity: 0.5;
+}
