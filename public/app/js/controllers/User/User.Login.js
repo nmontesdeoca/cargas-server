@@ -8,8 +8,8 @@ angular.module('Controllers')
         $scope.user = {};
         $rootScope.error = null;
 
-        $scope.$parent.menu_selected = '';
-        $scope.$parent.title = 'Login';
+        $scope.$parent.menu_selected = 'Login';
+        $scope.$parent.title = 'Ingreso';
 
         $scope.login = function () {
             $http.post('/api/login', {
