@@ -12,35 +12,10 @@
     <button type="submit" class="button-block">Ingresar</button>
     <p class="count-negative error-message" ng-show="error">{{error}}</p>
     <p class="enter-optional-text">O ingresar utilizando:</p>
-    <a href="/api/auth/twitter" data-ignore="push" class="social-button twitter-button">Twitter</a>
-    <a href="/api/auth/facebook" data-ignore="push" class="social-button facebook-button">Facebook</a>
-    <a href="/api/auth/google" data-ignore="push" class="social-button google-button">Google</a>
-    <p>
-        No tienes cuenta aún? <a href="/register">Registrarme</a>
-    </p>
+    <a href="/api/auth/twitter" class="social-button twitter-button" target="_self">Twitter</a>
+    <a href="/api/auth/facebook" class="social-button facebook-button" target="_self">Facebook</a>
+    <!--
+    <a href="/api/auth/google" class="social-button google-button">Google</a>
+    -->
+    <p>No tienes cuenta aún? <a href="/register">Registrarme</a></p>
 </form>
-<!-- start Nico code
-<p>
-    <a href="/api/auth/twitter" target="_self">
-        <img src="/images/sign-in-with-twitter.png" alt="sign in with twitter">
-    </a>
-</p>
-<p>
-    <a href="/api/auth/facebook" target="_self">
-        <img src="/images/sign-in-with-facebook.png" alt="sign in with facebook">
-    </a>
-    <span>Facebook solo funciona desde heroku porque implica un dominio fijo, y yo configure el de heroku</span>
-</p>
-
-<!--
-GOOGLE is not implemented
-<p>
-    <a href="/auth/google" target="_self">
-        <img src="/images/sign-in-with-google.png" alt="sign in with google">
-    </a>
-</p>
-
-
-<p><a href="/register">Registrarme</a></p>
-
-end nico code -->
