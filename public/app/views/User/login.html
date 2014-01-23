@@ -9,18 +9,15 @@
             <input type="password" name="password" placeholder="secret" ng-model="user.password">
         </div>
     </div>
-    <button type="submit" class="button-block">Entrar</button>
+    <button type="submit" class="button-block">Ingresar</button>
+    <p class="enter-optional-text">O ingresar utilizando:</p>
+    <a href="/api/auth/twitter" data-ignore="push" class="social-button twitter-button">Twitter</a>
+    <a href="/api/auth/facebook" data-ignore="push" class="social-button facebook-button">Facebook</a>
+    <a href="/api/auth/google" data-ignore="push" class="social-button google-button">Google</a>
+    <p>
+        No tienes cuenta aún? <a href="/register">Registrarme</a>
+    </p>
 </form>
-<p>
-    <a href="/api/auth/twitter" data-ignore="push">
-        <img src="/images/sign-in-with-twitter.png" alt="sign in with twitter">
-    </a>
-</p>
-<p>
-    <a href="/api/auth/facebook" data-ignore="push">
-        <img src="/images/sign-in-with-facebook.png" alt="sign in with facebook">
-    </a>
-</p>
 <!--
 GOOGLE is not implemented
 <p>
@@ -29,5 +26,4 @@ GOOGLE is not implemented
     </a>
 </p>
 -->
-<p><a href="/register">Registrarme</a></p>
 <p class="count-negative" ng-show="error">{{error}}</p>
