@@ -10,6 +10,7 @@
         </div>
     </div>
     <button type="submit" class="button-block">Ingresar</button>
+    <p class="count-negative error-message" ng-show="error">{{error}}</p>
     <p class="enter-optional-text">O ingresar utilizando:</p>
     <a href="/api/auth/twitter" data-ignore="push" class="social-button twitter-button">Twitter</a>
     <a href="/api/auth/facebook" data-ignore="push" class="social-button facebook-button">Facebook</a>
@@ -18,7 +19,7 @@
         No tienes cuenta aún? <a href="/register">Registrarme</a>
     </p>
 </form>
-<!-- Codigo Nico
+<!-- start Nico code
 <p>
     <a href="/api/auth/twitter" target="_self">
         <img src="/images/sign-in-with-twitter.png" alt="sign in with twitter">
@@ -42,6 +43,4 @@ GOOGLE is not implemented
 
 <p><a href="/register">Registrarme</a></p>
 
-Termina codigo nico  -->
-
-<p class="count-negative error-message" ng-show="error">{{error}}</p>
+end nico code -->

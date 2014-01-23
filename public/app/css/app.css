@@ -1321,12 +1321,12 @@ nav .tab-item a {
 .social-button {
     background: transparent url(../../images/social-icons.png) no-repeat;
     color: #fff;
+    display: block;
     height: 48px;
     line-height: 46px;
     margin-bottom: 10px;
     padding: 0 0 0 3%;
     text-shadow: none;
-    width: 96.9%;
 }
 
 .facebook-button {
@@ -1364,6 +1364,14 @@ nav .tab-item a {
 
 .enter-optional-text {
     margin: 15px 0 5px;
+}
+
+.error-message {
+    display: block;
+    font-size: 13px;
+    line-height: 17px;
+    margin: 15px 0;
+    padding: 10px 15px;
 }
 
 [disabled] {
