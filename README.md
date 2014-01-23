@@ -57,7 +57,7 @@ Idea de modelos
     created_at: { type: Date, default: Date.now },
     updated_at: Date
 
-Contribuidores
+### Contribuidores
 
 * [Nicolas Montesdeoca](https://github.com/nmontesdeoca) - [@_nmontesdeoca](https://twitter.com/_nmontesdeoca)
 * [Gustavo Cañete](https://github.com/neggro) - [@neggro](https://twitter.com/neggrouy)
