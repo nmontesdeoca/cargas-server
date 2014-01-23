@@ -9,12 +9,12 @@ RefuelSchema = new Schema({
     capacity: { type: Number },
     average: { type: Number },
     kilometers: { type: Number },
-    created_at: { type: Date, default: Date.now },
-    updated_at: Date
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: Date
 });
 
 RefuelSchema.pre('save', function (next) {
-    this.updated_at = new Date();
+    this.updatedAt = new Date();
     next.apply(this);
 });
 

@@ -1,0 +1,28 @@
+<form ng-submit="add()">
+    <div class="input-group">
+        <div class="input-row">
+            <label>Nombre</label>
+            <input type="text" name="name" placeholder="Super 95 SP" ng-model="fuel.name">
+        </div>
+        <div class="input-row">
+            <label>Costo</label>
+            <input type="text" name="cost" placeholder="35.50" ng-model="fuel.cost">
+        </div>
+    </div>
+    <button type="submit" class="button-block">Agregar</button>
+</form>
+
+<ul class="list inset">
+    <li>Combustibles</li>
+    <li ng-repeat="fuel in fuels | filter:defaultFuels">
+        <span>{{ fuel.name }} ({{ fuel.cost | currency }})</span>
+    </li>
+</ul>
+
+<ul class="list inset">
+    <li>Mis Combustibles</li>
+    <li ng-repeat="fuel in fuels | filter:myFuels">
+        <span>{{ fuel.name }} ({{ fuel.cost | currency }})</span>
+        <button class="button negative" ng-click="delete(fuel._id)">Eliminar</button>
+    </li>
+</ul>

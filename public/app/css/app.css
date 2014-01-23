@@ -1294,6 +1294,7 @@ button.button-block {
   right: 105px;
 }
 
+
 /* just suggested styles */
 body,
 header,
@@ -1302,7 +1303,7 @@ nav {
 }
 .content {
     min-width: 304px;
-    /* content already has padding */
+    /* content already has padding, just test with this */
     padding: 2.5%;
 }
 nav .tab-item {
@@ -1365,3 +1366,6 @@ nav .tab-item a {
     margin: 15px 0 5px;
 }
 
+[disabled] {
+  opacity: 0.5;
+}

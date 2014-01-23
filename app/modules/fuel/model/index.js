@@ -6,12 +6,12 @@ FuelSchema = new Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     cost: { type: Number },
     name: { type: String },
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date }
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date }
 });
 
 FuelSchema.pre('save', function (next) {
-    this.updated_at = new Date();
+    this.updatedAt = new Date();
     next.apply(this);
 });
 

@@ -1,6 +1,6 @@
 angular.module('Controllers')
 .controller('Main', ['$rootScope', function ($rootScope) {
-    $rootScope.menu_selected = 'Home';
+    $rootScope.menuSelected = 'Home';
 
     $rootScope.tabs = [
         {

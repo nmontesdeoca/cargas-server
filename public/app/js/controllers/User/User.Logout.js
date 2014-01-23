@@ -5,7 +5,7 @@ angular.module('Controllers')
     '$location',
     function ($scope, $http, $location) {
 
-        $scope.$parent.menu_selected = 'Logout';
+        $scope.$parent.menuSelected = 'Logout';
 
         $http.get('/api/logout').then(function (user) {
             $location.url('/');

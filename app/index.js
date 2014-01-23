@@ -19,9 +19,9 @@ utils.requireModules(__dirname + '/modules', app);
  */
 domain = app.get('domain');
 config = {
-    facebook: { callbackURL: domain + '/auth/facebook/callback' },
-    twitter: { callbackURL: domain + '/auth/twitter/callback' },
-    google: { callbackURL: domain + '/auth/google/callback' }
+    facebook: { callbackURL: domain + '/api/auth/facebook/callback' },
+    twitter: { callbackURL: domain + '/api/auth/twitter/callback' },
+    google: { callbackURL: domain + '/api/auth/google/callback' }
 };
 if (process.env.CONFIGURED) {
     config.facebook.clientID = process.env.FACEBOOK_CLIENT_ID;
@@ -37,6 +37,31 @@ if (process.env.CONFIGURED) {
 }
 require('../config/passport')(require('passport'), config);
 
+/*
+app.get('/fuels', function (request, response) {
+
+    var mongoose = require('mongoose'),
+        Fuel = mongoose.model('Fuel');
+
+    new Fuel({
+        name: 'Premium 97 SP',
+        cost: 42.10
+    }).save();
+
+    new Fuel({
+        name: 'Gasoil',
+        cost: 38.70
+    }).save();
+
+    new Fuel({
+        name: 'Super 95 SP',
+        cost: 40.60
+    }).save();
+
+    response.send('Combustibles actualizados');
+});
+*/
+
 /**
  * in order to get the one page application working well,
  * we need to redirect all the pages not found
@@ -45,3 +70,4 @@ require('../config/passport')(require('passport'), config);
 app.use(function (request, response, next) {
     response.sendfile(__dirname + '/views/index.html');
 });
+

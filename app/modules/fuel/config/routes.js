@@ -4,8 +4,12 @@ var controller = require('../controller'),
 
 module.exports = function (app) {
     app.get('/api/fuel', authorization.requiresLogin, controller.list);
+    app.post('/api/fuel', authorization.requiresLogin, controller.create);
+    app.get('/api/fuel/:id', authorization.requiresLogin, controller.get);
+    app.delete('/api/fuel/:id', authorization.requiresLogin, controller.delete);
 
     /*
+    insert fuels
     app.get('/fuels', function (request, response) {
         var Fuel = mongoose.model('Fuel'),
             premium = new Fuel(),
@@ -33,7 +37,4 @@ module.exports = function (app) {
         response.send('Combustibles actualizados');
     });
     */
-
-    // app.post('/api/fuel', authorization.requiresLogin, controller.create);
-    // app.get('/api/fuel/:id', authorization.requiresLogin, controller.get);
 };

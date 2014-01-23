@@ -1,9 +1,9 @@
 <ul class="list">
     <li ng-repeat="refuel in refuels">
         <strong>{{ refuel.cost | currency }}</strong>
-        <p>{{ refuel.kilometers }} kms</p>
-        <p>{{ refuel.capacity }} lts</p>
-        <p>{{ refuel.created_at | date:'dd-MM-yyyy'}}</p>
+        <p>{{ refuel.kilometers }} kil&oacute;metros</p>
+        <p>{{ refuel.capacity }} litros</p>
+        <p>{{ refuel.createdAt | date:'dd-MM-yyyy'}}</p>
         <a href="/refuel/{{ refuel._id }}" class="button edit">Editar</a>
         <button class="button-negative" ng-click="delete(refuel._id)">Eliminar</button>
     </li>

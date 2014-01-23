@@ -6,8 +6,13 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
     function ($routeProvider, $httpProvider, $locationProvider) {
 
         var utils = {
+
             fuels: ['Fuel', function (Fuel) {
                 return Fuel.query();
+            }],
+
+            refuel: ['$route', 'Refuel', function ($route, Refuel) {
+                return Refuel.get({ id: $route.current.params.id });
             }],
 
             refuels: ['Refuel', function (Refuel) {
@@ -23,7 +28,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                             deferred.resolve(new User(user));
                         } else {
                             $rootScope.message = 'You need to log in.';
-                            // deferred.reject();
+                            deferred.reject();
                             $location.url('/login');
                         }
                     });
@@ -41,7 +46,7 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
                         function (response) {
                             if (response.status === 401) {
                                 $location.url('/login');
-                                // return $q.reject(response);
+                                return $q.reject(response);
                             }
                         }
                     );
@@ -66,7 +71,16 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
             templateUrl: '/app/views/User/account.html',
             controller: 'User.Account',
             resolve: {
-                user: utils.checkLoggedIn
+                user: utils.checkLoggedIn,
+                fuels: utils.fuels
+            }
+        })
+        .when('/account/fuels', {
+            templateUrl: '/app/views/User/account.fuels.html',
+            controller: 'User.Account.Fuels',
+            resolve: {
+                user: utils.checkLoggedIn,
+                fuels: utils.fuels
             }
         })
         .when('/logout', {
@@ -89,7 +103,8 @@ angular.module('CarGas', ['ngRoute', 'Controllers'])
             controller: 'Refuel.Edit',
             resolve: {
                 fuels: utils.fuels,
-                user: utils.checkLoggedIn
+                user: utils.checkLoggedIn,
+                refuel: utils.refuel
             }
         })
         .when('/refuels', {
