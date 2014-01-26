@@ -16,7 +16,7 @@ nav .tab-item {
 nav .tab-item a {
     display: block;
     height: 100%;
-    line-height: 46px;
+    /* line-height: 46px; */
     margin: 0;
     width: 100%;
 }
@@ -74,7 +74,7 @@ nav .tab-item a {
 }
 
 .list .edit {
-  right: 105px;
+  right: 70px;
 }
 
 .ng-cloak {
@@ -83,4 +83,9 @@ nav .tab-item a {
 
 .bar-tab.ng-hide ~ .content {
     bottom: 0;
+}
+
+.tab-item i {
+    color: #FFF;
+    margin-top: 10px;
 }

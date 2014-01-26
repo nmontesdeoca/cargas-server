@@ -6,22 +6,26 @@ angular.module('CarGas.Main')
         {
             menu: 'Account',
             href: '/account',
-            text: 'Mi Cuenta'
+            text: 'Mi Cuenta',
+            icon: 'fa-briefcase'
         },
         {
             menu: 'Refuel',
             href: '/refuel',
-            text: 'Cargar'
+            text: 'Cargar',
+            icon: 'fa-plus'
         },
         {
             menu: 'Refuels',
             href: '/refuels',
-            text: 'Listar'
+            text: 'Listar',
+            icon: 'fa-archive'
         },
         {
             menu: 'Logout',
             href: '/logout',
-            text: 'Salir'
+            text: 'Salir',
+            icon: 'fa-power-off'
         }
     ];
 }]);

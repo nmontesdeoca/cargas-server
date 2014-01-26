@@ -20,6 +20,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/images/touch-icons/apple-touch-icon-57x57.png">
 
     <link rel="stylesheet" href="/css/ratchet.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body ng-controller="Main" class="ng-cloak">
@@ -37,7 +38,7 @@
                 class="tab-item{{ menuSelected === tab.menu ? ' active' : '' }}">
 
                 <a href="{{ tab.href }}">
-                    <!--<img class="tab-icon" src="img/icon-home.png">-->
+                    <i class="fa fa-1g {{ tab.icon }}"></i>
                     <div class="tab-label">{{ tab.text }}</div>
                 </a>
             </li>
