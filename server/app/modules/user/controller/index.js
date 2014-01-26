@@ -14,12 +14,12 @@ module.exports = {
         });
     },
     get: function (request, response) {
-        response.json(request.user);
+        response.json(request.user.toObject());
     },
     update: function (request, response) {
         request.user.set(request.body);
         request.user.save(function (error, user) {
-            response.json(user);
+            response.json(user.toObject());
         });
     },
     login: function (request, response) {
@@ -30,6 +30,6 @@ module.exports = {
         response.send(200);
     },
     loggedin: function (request, response) {
-        response.send(request.isAuthenticated() ? request.user : '0');
+        response.send(request.isAuthenticated() ? request.user.toObject() : '0');
     }
 };

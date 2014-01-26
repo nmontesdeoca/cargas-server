@@ -30,12 +30,18 @@ UserSchema = new Schema({
     updatedAt: Date,
 });
 
-/*
+if (!UserSchema.options.toObject) {
+    UserSchema.options.toObject = {};
+}
+
+/**
+ * we delete the salt and the hashedPassword
+ * in order to don't send these properties to the client (front end)
+ */
 UserSchema.options.toObject.transform = function (document, result, options) {
     delete result.salt;
     delete result.hashedPassword;
 };
-*/
 
 /**
  * virtuals
