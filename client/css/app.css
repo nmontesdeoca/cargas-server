@@ -84,3 +84,13 @@ nav .tab-item a {
 .bar-tab.ng-hide ~ .content {
     bottom: 0;
 }
+
+.user-info {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.user-info img {
+    height: 34px;
+}

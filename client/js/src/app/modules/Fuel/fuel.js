@@ -1,1 +1,1 @@
-angular.module('FuelModule', []);
+angular.module('CarGas.Fuel', []);

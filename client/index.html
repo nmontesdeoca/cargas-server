@@ -26,6 +26,10 @@
 
     <header class="bar-title" ng-show="title">
         <h1 class="title">{{ title || 'Title' }}</h1>
+        <div class="user-info" ng-show="user.twitter.name">
+            <img src="{{ user.twitter.profile_image_url }}" alt="{{ user.twitter.name }}">
+            <span>{{ user.twitter.name }}</span>
+        </div>
     </header>
 
     <nav

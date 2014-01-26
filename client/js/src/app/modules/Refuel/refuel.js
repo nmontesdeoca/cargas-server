@@ -1,4 +1,4 @@
-angular.module('RefuelModule', ['ngResource'])
+angular.module('CarGas.Refuel', ['ngResource'])
 .config([
     '$routeProvider',
     '$authenticationProvider',

@@ -1,13 +1,17 @@
-angular.module('RefuelModule')
+angular.module('CarGas.Refuel')
 .controller('Refuel.List', [
     '$scope',
     '$location',
+    '$rootScope',
     'Refuel',
     'refuels',
-    function ($scope, $location, Refuel, refuels) {
+    'user',
+    function ($scope, $location, $rootScope, Refuel, refuels, user) {
 
         $scope.$parent.menuSelected = 'Refuels';
         $scope.$parent.title = 'Lista';
+
+        $rootScope.user = user;
 
         $scope.refuels = refuels;
 

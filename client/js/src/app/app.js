@@ -1,4 +1,11 @@
-angular.module('CarGas', ['ngRoute', 'ProvidersModule', 'MainModule', 'RefuelModule', 'UserModule', 'FuelModule'])
+angular.module('CarGas', [
+    'ngRoute',
+    'CarGas.Providers',
+    'CarGas.Main',
+    'CarGas.Refuel',
+    'CarGas.User',
+    'CarGas.Fuel'
+])
 .config([
     '$routeProvider',
     '$httpProvider',

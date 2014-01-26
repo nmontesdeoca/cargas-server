@@ -1,4 +1,4 @@
-angular.module('UserModule', ['ngResource'])
+angular.module('CarGas.User', ['ngResource'])
 .config([
     '$routeProvider',
     '$authenticationProvider',

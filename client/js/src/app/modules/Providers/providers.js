@@ -1,1 +1,1 @@
-angular.module('ProvidersModule', []);
+angular.module('CarGas.Providers', []);

@@ -1,4 +1,4 @@
-angular.module('UserModule')
+angular.module('CarGas.User')
 .controller('User.Register', [
     '$scope',
     '$http',

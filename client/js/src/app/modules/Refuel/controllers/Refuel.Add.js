@@ -1,4 +1,4 @@
-angular.module('RefuelModule')
+angular.module('CarGas.Refuel')
 .controller('Refuel.Add', [
     '$scope',
     '$location',

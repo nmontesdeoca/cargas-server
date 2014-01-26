@@ -1,4 +1,4 @@
-angular.module('MainModule')
+angular.module('CarGas.Main')
 .controller('Main', ['$rootScope', function ($rootScope) {
     $rootScope.menuSelected = 'Home';
 

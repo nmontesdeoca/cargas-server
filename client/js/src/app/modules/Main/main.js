@@ -1,1 +1,1 @@
-angular.module('MainModule', []);
+angular.module('CarGas.Main', []);

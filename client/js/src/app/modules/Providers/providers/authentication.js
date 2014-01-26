@@ -1,4 +1,4 @@
-angular.module('ProvidersModule')
+angular.module('CarGas.Providers')
 .provider('$authentication', function () {
 
     this.checkLoggedIn = ['$q', '$http', '$location', '$rootScope', 'User',

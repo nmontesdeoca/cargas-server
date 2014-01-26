@@ -1,4 +1,4 @@
-angular.module('ProvidersModule')
+angular.module('CarGas.Providers')
 .provider('$refuels', function () {
 
     this.refuels = ['Refuel', function (Refuel) {
