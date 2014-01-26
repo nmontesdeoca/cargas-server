@@ -1,5 +1,6 @@
 angular.module('CarGas', [
     'ngRoute',
+    'ngTouch',
     'CarGas.Providers',
     'CarGas.Main',
     'CarGas.Refuel',
