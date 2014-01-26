@@ -36,7 +36,7 @@ exports.localLogin = function (request, response, next) {
                 return next(error);
             }
             return response.send({
-                user: user
+                user: user.toObject()
             });
         });
     })(request, response, next);
