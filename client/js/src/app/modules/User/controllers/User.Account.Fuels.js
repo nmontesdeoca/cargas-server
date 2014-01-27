@@ -12,9 +12,7 @@ angular.module('CarGas.User')
         $scope.$parent.title = 'Mi Cuenta';
 
         $scope.user = user;
-        $scope.fuel = new Fuel({
-            user: user._id
-        });
+        $scope.fuel = new Fuel();
         $scope.fuels = fuels;
 
         $scope.defaultFuels = function (fuel) {
@@ -26,9 +24,16 @@ angular.module('CarGas.User')
         };
 
         $scope.add = function () {
-            $scope.fuel.$save();
-            $scope.fuels.push($scope.fuel);
-            $scope.fuel = new Fuel();
+            $scope.error = '';
+            $scope.fuel.user = user._id;
+            $scope.fuel.$save(function (fuel) {
+                if (fuel._id) {
+                    $scope.fuels.push($scope.fuel);
+                    $scope.fuel = new Fuel();
+                } else {
+                    $scope.error = 'Combustible no creado. Algo anduvo mal';
+                }
+            });
         };
 
         $scope.delete = function (id) {

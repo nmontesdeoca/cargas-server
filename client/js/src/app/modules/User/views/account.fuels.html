@@ -1,16 +1,21 @@
-<form ng-submit="add()">
+<p class="count-negative" ng-show="error">{{ error }}</p>
+
+<form ng-submit="add()" name="form" novalidate>
     <div class="input-group">
         <div class="input-row">
             <label>Nombre</label>
-            <input type="text" name="name" placeholder="Super 95 SP" ng-model="fuel.name">
+            <input type="text" name="name" placeholder="Super 95 SP" ng-model="fuel.name" required>
         </div>
         <div class="input-row">
             <label>Costo</label>
-            <input type="text" name="cost" placeholder="35.50" ng-model="fuel.cost">
+            <input type="text" name="cost" placeholder="35.50" ng-model="fuel.cost" required>
         </div>
     </div>
-    <button type="submit" class="button-block">Agregar</button>
+    <button type="submit" class="button-block" ng-disabled="!form.$valid">Agregar</button>
 </form>
+
+<p class="count-negative" ng-show="form.name.$error.required">Nombre valido requerido</p>
+<p class="count-negative" ng-show="form.cost.$error.required">Costo valido requerido</p>
 
 <ul class="list inset">
     <li>Combustibles</li>
