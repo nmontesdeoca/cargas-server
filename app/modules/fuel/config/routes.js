@@ -2,10 +2,10 @@ var controller = require('../controller'),
     authorization = require('../../../middlewares/authorization');
 
 module.exports = function (app) {
-    app.get('/api/fuel', authorization.requiresLogin, controller.list);
-    app.post('/api/fuel', authorization.requiresLogin, controller.create);
-    app.get('/api/fuel/:id', authorization.requiresLogin, controller.get);
-    app.delete('/api/fuel/:id', authorization.requiresLogin, controller.delete);
+    app.get('/fuel', authorization.requiresLogin, controller.list);
+    app.post('/fuel', authorization.requiresLogin, controller.create);
+    app.get('/fuel/:id', authorization.requiresLogin, controller.get);
+    app.delete('/fuel/:id', authorization.requiresLogin, controller.delete);
 
     /*
     app.get('/fuels', function (request, response) {
