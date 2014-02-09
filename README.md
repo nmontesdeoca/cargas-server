@@ -1,29 +1,7 @@
-CarGas
+CarGas Server
 ======
 
-Trata de ser una aplicacion orientada a moviles con el fin de permitirle a un usuario, registrar las recargas de combustible que le hace a su vehículo.
-
-Qué ve un usuario cuando entra a CarGas ?
-
-    Vé la página de login
-
-Y si ya estaba logueado ?
-
-    Vé el formulario para ingresar una nueva recarga
-
-Qué campos tiene el formulario de ingreso de recarga
-
-    kilometraje, tipo de combustible, costo o litros (solo uno de los dos es necesario, y el otro se calcula automaticamente con el precio del combustible).
-
-Qué puede hacer un usuario ?
-
-    * crearse una cuenta o entrar con una red social (facebook, twitter, google, etc.)
-    * ver su perfil y rellenarlo
-    * ver estadisticas sobre sus recargas
-    * ver historial de recargas
-    * ver los gastos realizados con sus recargas, por dia, por mes, por año
-    * podria tener varios vehiculos
-
+Es una API del tipo REST para crear aplicaciones con el fin de administrar las recargas de combustibles de tus vehiculos.
 
 Idea de modelos
 
@@ -56,6 +34,25 @@ Idea de modelos
     kilometers: { type: Number },
     created_at: { type: Date, default: Date.now },
     updated_at: Date
+
+
+### REST API
+
+GET '/fuel'
+POST '/fuel'
+GET '/fuel/:id'
+DELETE '/fuel/:id'
+
+GET '/refuel'
+POST '/refuel'
+GET '/refuel/:id'
+POST '/refuel/:id'
+DELETE '/refuel/:id'
+
+POST '/login'
+POST '/user'
+GET '/user'
+POST '/user/:id'
 
 ### Contribuidores
 
