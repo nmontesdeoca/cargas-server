@@ -38,21 +38,21 @@ Idea de modelos
 
 ### REST API
 
-GET '/fuel'
-POST '/fuel'
-GET '/fuel/:id'
-DELETE '/fuel/:id'
+    GET '/fuel'
+    POST '/fuel'
+    GET '/fuel/:id'
+    DELETE '/fuel/:id'
 
-GET '/refuel'
-POST '/refuel'
-GET '/refuel/:id'
-POST '/refuel/:id'
-DELETE '/refuel/:id'
+    GET '/refuel'
+    POST '/refuel'
+    GET '/refuel/:id'
+    POST '/refuel/:id'
+    DELETE '/refuel/:id'
 
-POST '/login'
-POST '/user'
-GET '/user'
-POST '/user/:id'
+    POST '/login'
+    POST '/user'
+    GET '/user'
+    POST '/user/:id'
 
 ### Contribuidores
 
