@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    messages = require('./messages'),
     BasicStrategy = require('passport-http').BasicStrategy,
     User = mongoose.model('User');
 
@@ -9,15 +10,12 @@ module.exports = function (passport) {
             User.findOne({ email: email }, function (err, user) {
                 if (err) {
                     return done(err);
-                }
-                if (!user) {
-                    return done(null, false, { message: 'Unknown user' });
-                }
-                if (!user.authenticate(password)) {
-                    return done(null, false, { message: 'Invalid password' });
+                } else if (!user || !user.authenticate(password)) {
+                    return done(null, false, { message: messages.invalidEmailOrPassword });
                 }
                 return done(null, user);
             })
         })
     );
+
 };

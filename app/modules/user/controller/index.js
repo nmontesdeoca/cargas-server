@@ -1,31 +1,40 @@
-var User = require('mongoose').model('User');
+var User = require('mongoose').model('User'),
+    messages = require('../../../../config/messages'),
+    utils = require('../../../../lib/utils');
 
 module.exports = {
     create: function (request, response) {
-        request.body.provider = 'local';
+        User
+            .findOne({ email: request.body.email })
+            .exec(function (error, user) {
+                if (error) {
+                    response.json(utils.createError(error));
+                } else if (!user) {
+                    new User(request.body).save(function (error, user) {
+                        if (error) {
+                            response.json(utils.createError(error));
+                        }
 
-        new User(request.body).save(function (err, user) {
-            if (err) {
-                response.send(err);
-            }
-            response.json(user);
+                        response.json(user);
+                    });
+                } else {
+                    response.json(utils.createError(messages.emailAlreadyRegistered));
+                }
+            });
+    },
+    login: function (request, response) {
+        response.json({
+            authenticated: request.isAuthenticated()
         });
     },
     get: function (request, response) {
+        console.log(request.isAuthenticated());
         response.json(request.user.toObject());
     },
     update: function (request, response) {
-        console.log('SETTING SOME FIELDS', request.user.set(request.body));
         request.user.set(request.body);
         request.user.save(function (error, user) {
             response.json(user.toObject());
         });
-    },
-    login: function (request, response) {
-        module.exports.get(request, response);
-    },
-    logout: function (request, response) {
-        request.logOut();
-        response.send(200);
     }
 };
