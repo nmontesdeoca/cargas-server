@@ -1,4 +1,5 @@
 var controller = require('../controller'),
+    // mongoose = require('mongoose'),
     authorization = require('../../../middlewares/authorization');
 
 module.exports = function (app) {
