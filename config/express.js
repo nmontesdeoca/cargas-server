@@ -16,6 +16,8 @@ module.exports = function (app, express) {
 
         app.use(passport.initialize());
         app.use(app.router);
+
+        app.use(require('../app/middlewares/cors'));
     });
 
     app.configure('development', function () {

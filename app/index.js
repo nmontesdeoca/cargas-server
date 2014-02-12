@@ -2,8 +2,6 @@ var express = require('express'),
     app = module.exports = express(),
     utils = require('../lib/utils');
 
-app.use(require('./middlewares/cors'));
-
 /**
  * configure the express application and connect to database
  */
