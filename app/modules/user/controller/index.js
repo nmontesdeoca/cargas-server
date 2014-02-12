@@ -1,35 +1,40 @@
-var User = require('mongoose').model('User');
+var User = require('mongoose').model('User'),
+    messages = require('../../../../config/messages'),
+    utils = require('../../../../lib/utils');
 
 module.exports = {
     create: function (request, response) {
-        var user = new User(request.body);
-        user.provider = 'local';
-        user.save(function (err) {
-            request.logIn(user, function (err) {
-                if (err) {
-                    return next.apply(this, [err]);
+        User
+            .findOne({ email: request.body.email })
+            .exec(function (error, user) {
+                if (error) {
+                    response.json(utils.createError(error));
+                } else if (!user) {
+                    new User(request.body).save(function (error, user) {
+                        if (error) {
+                            response.json(utils.createError(error));
+                        }
+
+                        response.json(user);
+                    });
+                } else {
+                    response.json(utils.createError(messages.emailAlreadyRegistered));
                 }
-                return response.json(user);
             });
+    },
+    login: function (request, response) {
+        response.json({
+            authenticated: request.isAuthenticated()
         });
     },
     get: function (request, response) {
-        response.json(request.user);
+        console.log(request.isAuthenticated());
+        response.json(request.user.toObject());
     },
     update: function (request, response) {
         request.user.set(request.body);
         request.user.save(function (error, user) {
-            response.json(user);
+            response.json(user.toObject());
         });
-    },
-    login: function (request, response) {
-        module.exports.get(request, response);
-    },
-    logout: function (request, response) {
-        request.logOut();
-        response.send(200);
-    },
-    loggedin: function (request, response) {
-        response.send(request.isAuthenticated() ? request.user : '0');
     }
 };

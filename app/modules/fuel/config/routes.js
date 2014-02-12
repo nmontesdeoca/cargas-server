@@ -3,36 +3,31 @@ var controller = require('../controller'),
     authorization = require('../../../middlewares/authorization');
 
 module.exports = function (app) {
-    app.get('/api/fuel', authorization.requiresLogin, controller.list);
-    app.post('/api/fuel', authorization.requiresLogin, controller.create);
-    app.get('/api/fuel/:id', authorization.requiresLogin, controller.get);
-    app.delete('/api/fuel/:id', authorization.requiresLogin, controller.delete);
+    app.get('/fuel', authorization.requiresLogin, controller.list);
+    app.post('/fuel', authorization.requiresLogin, controller.create);
+    app.get('/fuel/:id', authorization.requiresLogin, controller.get);
+    app.delete('/fuel/:id', authorization.requiresLogin, controller.delete);
 
     /*
-    insert fuels
     app.get('/fuels', function (request, response) {
-        var Fuel = mongoose.model('Fuel'),
-            premium = new Fuel(),
-            gasoil = new Fuel(),
-            super95 = new Fuel();
 
-        premium.set({
+        var mongoose = require('mongoose'),
+            Fuel = mongoose.model('Fuel');
+
+        new Fuel({
             name: 'Premium 97 SP',
             cost: 42.10
-        });
-        premium.save();
+        }).save();
 
-        gasoil.set({
+        new Fuel({
             name: 'Gasoil',
             cost: 38.70
-        });
-        gasoil.save();
+        }).save();
 
-        super95.set({
+        new Fuel({
             name: 'Super 95 SP',
             cost: 40.60
-        });
-        super95.save();
+        }).save();
 
         response.send('Combustibles actualizados');
     });

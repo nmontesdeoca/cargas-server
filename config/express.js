@@ -9,12 +9,9 @@ module.exports = function (app, express) {
         app.use(express.logger('dev'));
         app.use(express.bodyParser());
         app.use(express.methodOverride());
-        app.use(express.cookieParser('car_gas_secret_here'));
-        app.use(express.session({ cookie: { maxAge: (24 * 60 * 60 * 1000) } }));
+
         app.use(passport.initialize());
-        app.use(passport.session());
         app.use(app.router);
-        app.use(express.static(__dirname + '/../public'));
     });
 
     app.configure('development', function () {

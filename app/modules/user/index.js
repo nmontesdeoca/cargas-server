@@ -1,9 +1,11 @@
 var applicationFactory = require('../../../lib/application/factory'),
-    app = module.exports = applicationFactory.newApplication({
-        name: 'user',
-        bodyParser: true,
-        methodOverride: true,
-        router: true
+    app = module.exports = applicationFactory.newApplication(function (app, express) {
+        app.configure(function () {
+            app.set('name', 'user');
+            app.use(express.bodyParser());
+            app.use(express.methodOverride());
+            app.use(app.router);
+        });
     });
 
 /**
