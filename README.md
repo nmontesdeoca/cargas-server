@@ -6,17 +6,25 @@ Es una API del tipo REST para crear aplicaciones con el fin de administrar las r
 Idea de modelos
 
     User
-    first_name      String
-    last_name       String
-    provider        String
-    hashed_password String
-    salt            String
-    authToken       String
-    facebook        Object
-    twitter         Object
-    google          Object
-    created_at      Date
-    updated_at      Date
+    firstName: { type: String, validate: [ validation.empty, 'first name cannot be blank' ] },
+    lastName: { type: String, validate: [ validation.empty, 'last name cannot be blank' ] },
+    email: {
+        type: String,
+        lowercase: true,
+        unique: true,
+        validate: [
+            { validator: validation.empty, msg: 'email cannot be blank' },
+            { validator: validation.email, msg: 'email already exists' }
+        ]
+    },
+    hashedPassword: { type: String, validate: [ validation.empty, 'password name cannot be blank' ] },
+    salt: String,
+    provider: String,
+    facebook: {},
+    twitter: {},
+    google: {},
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: Date
 
     Fuel
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
