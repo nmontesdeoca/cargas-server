@@ -7,7 +7,11 @@ module.exports = function (app, express) {
         app.set('db', process.env.DB || require('./database').db);
         app.set('domain', process.env.DOMAIN || ('http://localhost:' + app.get('port')));
         app.use(express.logger('dev'));
-        app.use(express.bodyParser());
+
+        // app.use(express.bodyParser());
+        app.use(express.json());
+        app.use(express.urlencoded());
+
         app.use(express.methodOverride());
 
         app.use(passport.initialize());
