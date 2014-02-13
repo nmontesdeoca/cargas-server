@@ -28,7 +28,6 @@ module.exports = {
         });
     },
     get: function (request, response) {
-        console.log(request.isAuthenticated());
         response.json(request.user.toObject());
     },
     update: function (request, response) {

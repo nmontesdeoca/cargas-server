@@ -6,14 +6,8 @@ var oauth2orize = require('oauth2orize'),
     // create OAuth 2.0 server
     server = oauth2orize.createServer();
 
-console.log('auth module index.js');
-console.log(config);
-
 // Exchange email & password for access token.
 server.exchange(oauth2orize.exchange.password(function (client, email, password, scope, done) {
-
-    console.log('oauth2orize.exchange.password', arguments);
-
     var User = mongoose.model('User'),
         AccessToken = mongoose.model('AccessToken'),
         RefreshToken = mongoose.model('RefreshToken');
@@ -83,9 +77,6 @@ server.exchange(oauth2orize.exchange.password(function (client, email, password,
 
 // Exchange refreshToken for access token.
 server.exchange(oauth2orize.exchange.refreshToken(function (client, refreshToken, scope, done) {
-
-    console.log('oauth2orize.exchange.refreshToken');
-
     var User = mongoose.model('User'),
         AccessToken = mongoose.model('AccessToken'),
         RefreshToken = mongoose.model('RefreshToken');

@@ -1,5 +1,5 @@
 {
     "security": {
-        "tokenLife" : 3600
+        "tokenLife" : 86400
     }
 }

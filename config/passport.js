@@ -12,9 +12,6 @@ var config = require('./config'),
 module.exports = function (passport) {
     passport.use(new BasicStrategy(
         function (email, password, done) {
-
-            console.log('BasicStrategy', email, password);
-
             Client.findOne({ clientId: email }, function (err, client) {
                 if (err) {
                     return done(err);
@@ -28,8 +25,6 @@ module.exports = function (passport) {
                     return done(null, false);
                 }
 
-                console.log('BasicStrategy OK');
-
                 return done(null, client);
             });
         }
@@ -37,9 +32,6 @@ module.exports = function (passport) {
 
     passport.use(new ClientPasswordStrategy(
         function (clientId, clientSecret, done) {
-
-            console.log('ClientPasswordStrategy', clientId, clientSecret);
-
             Client.findOne({ clientId: clientId }, function (err, client) {
                 if (err) {
                     return done(err);
@@ -60,11 +52,7 @@ module.exports = function (passport) {
 
     passport.use(new BearerStrategy(
         function (accessToken, done) {
-
-            console.log('BearerStrategy', accessToken);
-
             AccessToken.findOne({ token: accessToken }, function (err, token) {
-                console.log(arguments);
                 if (err) {
                     return done(err);
                 }
