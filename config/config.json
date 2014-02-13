@@ -1,0 +1,5 @@
+{
+    "security": {
+        "tokenLife" : 3600
+    }
+}

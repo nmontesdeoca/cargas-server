@@ -11,21 +11,18 @@ UserSchema = new Schema({
     email: {
         type: String,
         lowercase: true,
+        unique: true,
         validate: [
             { validator: validation.empty, msg: 'email cannot be blank' },
             { validator: validation.email, msg: 'email already exists' }
         ]
     },
-    provider: String,
     hashedPassword: { type: String, validate: [ validation.empty, 'password name cannot be blank' ] },
     salt: String,
-    authToken: String,
+    provider: String,
     facebook: {},
-    facebookId: String,
     twitter: {},
-    twitterId: String,
     google: {},
-    googleId: String,
     createdAt: { type: Date, default: Date.now },
     updatedAt: Date,
 });

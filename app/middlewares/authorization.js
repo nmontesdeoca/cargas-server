@@ -1,7 +1,9 @@
 /**
  * middleware to check if the user has the right access
  */
-exports.requiresLogin = require('passport').authenticate('basic', { session: false });
+
+// exports.requiresLogin = require('passport').authenticate('basic', { session: false });
+exports.requiresLogin = require('passport').authenticate('bearer', { session: false });
 
 exports.loginMiddleware = function (request, response, next) {
     require('passport').authenticate('basic', { session: false }, function (error, user, info) {

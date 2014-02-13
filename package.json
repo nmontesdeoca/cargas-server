@@ -12,6 +12,9 @@
         "express": "3.1.0",
         "mongoose": "*",
         "passport": "*",
-        "passport-http": "*"
+        "passport-http": "*",
+        "passport-http-bearer": "*",
+        "passport-oauth2-client-password": "*",
+        "oauth2orize": "*"
     }
 }
